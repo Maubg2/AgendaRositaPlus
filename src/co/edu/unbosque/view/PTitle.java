@@ -32,8 +32,8 @@ public class PTitle extends JPanel{
 		
 		mainTitle = new JLabel("Agenda de Rosita plus");
 		mainTitle.setForeground(Color.BLACK);
-		mainTitle.setBounds(200, 20, 380, 60);
-		mainTitle.setFont(new Font("cooper black", Font.BOLD, 30));
+		mainTitle.setBounds(220, 20, 380, 60);
+		mainTitle.setFont(new Font("times new roman", Font.BOLD, 30));
 		add(mainTitle);
 		
 	}
