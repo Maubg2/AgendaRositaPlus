@@ -22,6 +22,7 @@ public class PButtons extends JPanel{
 		deleteButton = new JButton();
 		loadData = new JButton();
 		loadFile = new JButton();
+		System.out.println("Funciona");
 		
 	}
 
