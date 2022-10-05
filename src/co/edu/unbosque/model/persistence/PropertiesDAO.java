@@ -28,7 +28,7 @@ public class PropertiesDAO {
 			System.out.println("Archivo no encontrado");
 		} catch(IOException e) {
 			System.out.println("Error cargando el archivo");
-		} 
+
 		
 	}
 	
