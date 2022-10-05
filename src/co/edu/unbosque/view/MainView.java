@@ -1,5 +1,7 @@
 package co.edu.unbosque.view;
 
+import java.awt.Color;
+
 import javax.swing.JFrame;
 
 public class MainView extends JFrame{
@@ -10,14 +12,24 @@ public class MainView extends JFrame{
 	
 	public MainView() {
 		
-		titlePanel = new PTitle();
-		filePanel = new PFile();
-		buttonsPanel = new PButtons();
+		getContentPane().setLayout(null);
+		getContentPane().setBackground(Color.decode("#002B5B"));
+		setTitle("Agenda de Rosita plus");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(800, 600);
+		setLocationRelativeTo(null);
+		setResizable(false);
+		setVisible(true);
+
 		funcionar();
 		
 	}
 	
 	public void funcionar() {
+		
+		titlePanel = new PTitle();
+		filePanel = new PFile();
+		buttonsPanel = new PButtons();
 		
 	}
 
