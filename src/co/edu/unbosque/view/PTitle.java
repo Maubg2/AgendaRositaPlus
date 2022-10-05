@@ -10,7 +10,12 @@ public class PTitle extends JPanel{
 	public PTitle() {
 		
 		mainTitle = new JLabel("Agenda de Rosita plus");
+		funcionar();
 		
+	}
+	
+	public void funcionar() {
+		System.out.println("Funciona");
 	}
 
 	public JLabel getMainTitle() {
