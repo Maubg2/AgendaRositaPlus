@@ -27,8 +27,23 @@ public class PButtons extends JPanel{
 	}
 	
 	public void funcionar() {
-		addButton.setBounds(30, 20, 120, 60);
+		addButton.setBounds(30, 20, 150, 20);
 		add(addButton);
+		
+		searchButton.setBounds(30, 50, 150, 20);
+		add(searchButton);
+		
+		modifyButton.setBounds(30, 80, 150, 20);
+		add(modifyButton);
+		
+		deleteButton.setBounds(30, 110, 150, 20);
+		add(deleteButton);
+		
+		loadData.setBounds(30, 200, 150, 20);
+		add(loadData);
+		
+		loadFile.setBounds(30, 240, 150, 20);
+		add(loadFile);
 	}
 
 	public JButton getAddButton() {
