@@ -28,8 +28,16 @@ public class MainView extends JFrame{
 	public void funcionar() {
 		
 		titlePanel = new PTitle();
+		titlePanel.setBounds(0, 0, 800, 100);
+		getContentPane().add(titlePanel);
+		
 		filePanel = new PFile();
+		filePanel.setBounds(400, 100, 400, 500);
+		getContentPane().add(filePanel);
+		
 		buttonsPanel = new PButtons();
+		buttonsPanel.setBounds(0, 100, 400, 500);
+		getContentPane().add(buttonsPanel);
 		
 	}
 

@@ -1,5 +1,8 @@
 package co.edu.unbosque.view;
 
+import java.awt.Color;
+import java.awt.Font;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -9,13 +12,30 @@ public class PTitle extends JPanel{
 	
 	public PTitle() {
 		
+		setLayout(null);
+		funcionar();
+		setVisible(true);
+		
+		/*setLayout(null);
+		setBounds(0, 0, 800, 100);
+		//setBackground(Color.BLACK);
+		setForeground(Color.black);
+		setVisible(true);
 		mainTitle = new JLabel("Agenda de Rosita plus");
 		funcionar();
-		
+		*/
 	}
 	
 	public void funcionar() {
-		System.out.println("Funciona");
+		
+		setBackground(Color.decode("#256D85"));
+		
+		mainTitle = new JLabel("Agenda de Rosita plus");
+		mainTitle.setForeground(Color.BLACK);
+		mainTitle.setBounds(200, 20, 380, 60);
+		mainTitle.setFont(new Font("cooper black", Font.BOLD, 30));
+		add(mainTitle);
+		
 	}
 
 	public JLabel getMainTitle() {
