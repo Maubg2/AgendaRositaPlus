@@ -37,6 +37,7 @@ public class MainView extends JFrame{
 		
 		buttonsPanel = new PButtons();
 		buttonsPanel.setBounds(0, 100, 400, 500);
+		buttonsPanel.setBackground(Color.decode("#2B4865"));
 		getContentPane().add(buttonsPanel);
 		
 	}
