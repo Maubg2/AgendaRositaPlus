@@ -5,22 +5,28 @@ import java.awt.event.ActionListener;
 
 import co.edu.unbosque.view.MainView;
 import co.edu.unbosque.view.WindowView;
+import co.edu.unbosque.model.persistence.*;
 
 public class Controller implements ActionListener{
 	
 	private WindowView WindowTool;
 	private MainView mainView;
+	private ControllerDAO ControllerDAO;
 	
 	public Controller() {
 		
 		WindowTool = new WindowView();
 		mainView = new MainView();
+		ControllerDAO = new ControllerDAO();
 		funcionar();
 		
 	}
 	
+	private String src = "src/datos/agendaFisica.properties"; //Variable para agregar la ruta del archivo
+	
 	public void funcionar() {
 		setButtons();
+		ControllerDAO.getPropertiesDAO().loadData(src);
 	}
 	
 	public void setButtons() {
