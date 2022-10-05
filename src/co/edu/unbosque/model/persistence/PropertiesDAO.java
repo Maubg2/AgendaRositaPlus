@@ -35,6 +35,10 @@ public class PropertiesDAO {
 	public String readData(String key) {
 		return prop.getProperty(key);
 	}
+	public boolean isFileLoaded() {
+		return (f != null) ? true : false;
+		
+	}
 	public File getFileProperties() {
 		return this.f;
 	}

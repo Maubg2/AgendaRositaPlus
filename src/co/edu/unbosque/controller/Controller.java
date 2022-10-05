@@ -3,6 +3,8 @@ package co.edu.unbosque.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFileChooser;
+
 import co.edu.unbosque.view.MainView;
 import co.edu.unbosque.view.WindowView;
 import co.edu.unbosque.model.persistence.*;
@@ -22,11 +24,11 @@ public class Controller implements ActionListener{
 		
 	}
 	
-	private String src = "src/datos/agendaFisica.properties"; //Variable para agregar la ruta del archivo
+	//private String src = "src/datos/agendaFisica.properties"; //Variable para agregar la ruta del archivo
 	
 	public void funcionar() {
 		setButtons();
-		ControllerDAO.getPropertiesDAO().loadData(src);
+		//ControllerDAO.getPropertiesDAO().loadData(src);
 	}
 	
 	public void setButtons() {
@@ -52,7 +54,16 @@ public class Controller implements ActionListener{
 			System.out.println("Añadir presionado");
 			break;
 		case "search":
-			System.out.println("Buscar presionado");
+			//System.out.println("Buscar presionado");
+			boolean isLoaded = ControllerDAO.getPropertiesDAO().isFileLoaded();
+			if(isLoaded) {
+				String searchKey = WindowTool.getDataWindow("Ingrese la variable a buscar");
+				String response = ControllerDAO.getPropertiesDAO().readData(searchKey);
+				WindowTool.showWindow("Valor: " + response);
+			}else {
+				WindowTool.showWindow("Debe cargar un archivo primero");
+			}
+			
 			break;
 		case "modify":
 			System.out.println("Modificar presionado");
@@ -64,7 +75,8 @@ public class Controller implements ActionListener{
 			System.out.println("Ver datos presionado");
 			break;
 		case "loadFile":
-			System.out.println("Cargar archivo presionado");
+			//System.out.println("Cargar archivo presionado");
+			ControllerDAO.getPropertiesDAO().loadData(mainView.showFileChooser());
 			break;
 		default:
 			System.out.println("Error en los botones");

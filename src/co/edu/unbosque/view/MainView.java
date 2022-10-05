@@ -2,6 +2,7 @@ package co.edu.unbosque.view;
 
 import java.awt.Color;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 public class MainView extends JFrame{
@@ -9,7 +10,7 @@ public class MainView extends JFrame{
 	private PTitle titlePanel;
 	private PFile filePanel;
 	private PButtons buttonsPanel;
-
+	private JFileChooser fileChooser;
 	
 	public MainView() {
 		
@@ -42,6 +43,21 @@ public class MainView extends JFrame{
 		buttonsPanel.setBackground(Color.decode("#2B4865"));
 		getContentPane().add(buttonsPanel);
 		
+		fileChooser = new JFileChooser();
+		
+	}
+	
+	public String showFileChooser() {
+		String response = null;
+		int r = fileChooser.showSaveDialog(null);
+		if(r == JFileChooser.APPROVE_OPTION) {
+			response = fileChooser.getSelectedFile().getAbsolutePath();
+		}
+		else {
+			System.out.println("Operación cancelada");
+		}
+		
+		return response;
 	}
 
 	public PTitle getTitlePanel() {
