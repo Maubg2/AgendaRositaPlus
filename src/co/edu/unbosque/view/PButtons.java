@@ -16,14 +16,19 @@ public class PButtons extends JPanel{
 	
 	public PButtons() {
 		
-		addButton = new JButton();
-		searchButton = new JButton();
-		modifyButton = new JButton();
-		deleteButton = new JButton();
-		loadData = new JButton();
-		loadFile = new JButton();
-		System.out.println("Funciona");
-		
+		addButton = new JButton("Agregar");
+		searchButton = new JButton("Buscar");
+		modifyButton = new JButton("Modificar");
+		deleteButton = new JButton("Borrar");
+		loadData = new JButton("Ver datos");
+		loadFile = new JButton("Cargar archivo");
+		//System.out.println("Funciona");
+		funcionar();
+	}
+	
+	public void funcionar() {
+		addButton.setBounds(30, 20, 120, 60);
+		add(addButton);
 	}
 
 	public JButton getAddButton() {
@@ -58,19 +63,19 @@ public class PButtons extends JPanel{
 		this.deleteButton = deleteButton;
 	}
 
-	public JButton getLoadData() {
+	public JButton getLoadDataButton() {
 		return loadData;
 	}
 
-	public void setLoadData(JButton loadData) {
+	public void setLoadDataButton(JButton loadData) {
 		this.loadData = loadData;
 	}
 
-	public JButton getLoadFile() {
+	public JButton getLoadFileButton() {
 		return loadFile;
 	}
 
-	public void setLoadFile(JButton loadFile) {
+	public void setLoadFileButton(JButton loadFile) {
 		this.loadFile = loadFile;
 	}
 
