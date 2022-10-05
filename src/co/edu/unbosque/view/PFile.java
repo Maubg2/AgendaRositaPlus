@@ -12,9 +12,26 @@ public class PFile extends JPanel{
 	
 	public PFile(){
 		
+		setLayout(null);
+		funcionar();
+		setVisible(true);
+		
+		
+	}
+	
+	public void funcionar() {
+		
 		textArea = new JTextArea();
+		textArea.setBounds(20, 20, 300, 300);
+		add(textArea);
+		
 		fileLoaded = new JLabel("Archivo cargado: ");
+		fileLoaded.setBounds(100, 400, 120, 50);
+		add(fileLoaded);
+		
 		loadedValue = new JLabel("No");
+		loadedValue.setBounds(150, 400, 50, 50);
+		add(loadedValue);
 		
 	}
 
