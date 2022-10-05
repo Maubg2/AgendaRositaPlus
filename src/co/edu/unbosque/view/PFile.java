@@ -2,9 +2,12 @@ package co.edu.unbosque.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.TextArea;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 public class PFile extends JPanel{
@@ -12,6 +15,7 @@ public class PFile extends JPanel{
 	private JTextArea textArea;
 	private JLabel fileLoaded;
 	private JLabel loadedValue;
+	private JScrollPane areaScroll;
 	
 	public PFile(){
 		
@@ -26,9 +30,16 @@ public class PFile extends JPanel{
 		
 		setBackground(Color.decode("#002B5B"));
 		
+		
 		textArea = new JTextArea();
-		textArea.setBounds(30, 30, 330, 300);
-		add(textArea);
+		//textArea.setBounds(30, 30, 330, 300);
+		//add(textArea);
+		
+		areaScroll = new JScrollPane(textArea);
+		areaScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		areaScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		areaScroll.setBounds(30, 30, 330, 300);
+		add(areaScroll);
 		
 		fileLoaded = new JLabel("Archivo cargado: ");
 		fileLoaded.setFont(new Font("Times New Roman", 0, 20));

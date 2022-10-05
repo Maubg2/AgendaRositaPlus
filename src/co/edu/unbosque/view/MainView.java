@@ -9,6 +9,7 @@ public class MainView extends JFrame{
 	private PTitle titlePanel;
 	private PFile filePanel;
 	private PButtons buttonsPanel;
+
 	
 	public MainView() {
 		
