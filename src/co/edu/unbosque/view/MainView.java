@@ -12,6 +12,7 @@ public class MainView extends JFrame{
 	
 	public MainView() {
 		
+		funcionar();
 		getContentPane().setLayout(null);
 		getContentPane().setBackground(Color.decode("#002B5B"));
 		setTitle("Agenda de Rosita plus");
@@ -20,7 +21,7 @@ public class MainView extends JFrame{
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setVisible(true);
-		funcionar();
+		
 		
 		
 	}

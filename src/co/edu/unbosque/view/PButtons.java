@@ -16,17 +16,21 @@ public class PButtons extends JPanel{
 	
 	public PButtons() {
 		
+		
+		//System.out.println("Funciona");
+		setLayout(null);
+		funcionar();
+		setVisible(true);
+	}
+	
+	public void funcionar() {
 		addButton = new JButton("Agregar");
 		searchButton = new JButton("Buscar");
 		modifyButton = new JButton("Modificar");
 		deleteButton = new JButton("Borrar");
 		loadData = new JButton("Ver datos");
 		loadFile = new JButton("Cargar archivo");
-		//System.out.println("Funciona");
-		funcionar();
-	}
-	
-	public void funcionar() {
+		
 		addButton.setBounds(30, 20, 150, 20);
 		add(addButton);
 		
