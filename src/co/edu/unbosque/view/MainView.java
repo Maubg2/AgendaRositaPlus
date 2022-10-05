@@ -1,9 +1,12 @@
 package co.edu.unbosque.view;
 
 import java.awt.Color;
+import java.io.File;
+import java.io.FileFilter;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MainView extends JFrame{
 	
@@ -44,6 +47,9 @@ public class MainView extends JFrame{
 		getContentPane().add(buttonsPanel);
 		
 		fileChooser = new JFileChooser();
+		
+		fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("PROPERTIES", "properties"));
+		fileChooser.setAcceptAllFileFilterUsed(true);
 		
 	}
 	

@@ -75,8 +75,8 @@ public class PFile extends JPanel{
 		return loadedValue;
 	}
 
-	public void setLoadedValue(JLabel loadedValue) {
-		this.loadedValue = loadedValue;
+	public void setLoadedValue(String loadedValue) {
+		this.loadedValue.setText(loadedValue);
 	}
 
 }
