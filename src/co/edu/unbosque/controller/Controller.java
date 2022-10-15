@@ -14,14 +14,12 @@ public class Controller implements ActionListener{
 	private WindowView WindowTool;
 	private MainView mainView;
 	private ControllerDAO ControllerDAO;
-	private ModelProperties modelP;
 	
 	public Controller() {
 		
 		WindowTool = new WindowView();
 		mainView = new MainView();
 		ControllerDAO = new ControllerDAO();
-		modelP = new ModelProperties();
 		funcionar();
 		
 	}
@@ -53,7 +51,6 @@ public class Controller implements ActionListener{
 		String command = e.getActionCommand();
 		switch(command) {
 		case "add":
-			modelP.cambiarNombre();
 			System.out.println("Añadir presionado");
 			break;
 		case "search":
