@@ -77,6 +77,8 @@ public class Controller implements ActionListener{
 		case "loadFile":
 			//System.out.println("Cargar archivo presionado");
 			ControllerDAO.getPropertiesDAO().loadData(mainView.showFileChooser());
+			//Dividir los datos en archivos binarios
+			ControllerDAO.setBinaries();
 			boolean response = ControllerDAO.getPropertiesDAO().isFileLoaded();
 			if(response) 
 				mainView.getFilePanel().setLoadedValue("Si");
