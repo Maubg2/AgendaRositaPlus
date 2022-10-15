@@ -78,11 +78,11 @@ public class Controller implements ActionListener{
 			//System.out.println("Cargar archivo presionado");
 			ControllerDAO.getPropertiesDAO().loadData(mainView.showFileChooser());
 			boolean response = ControllerDAO.getPropertiesDAO().isFileLoaded();
-			if(response) {
+			if(response) 
 				mainView.getFilePanel().setLoadedValue("Si");
-			}else {
+			else 
 				mainView.getFilePanel().setLoadedValue("No");
-			}
+			
 			break;
 		default:
 			System.out.println("Error en los botones");
