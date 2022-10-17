@@ -52,18 +52,14 @@ public class Controller implements ActionListener{
 		switch(command) {
 		case "add":
 			System.out.println("Añadir presionado");
+			//Preguntar a qué categoría desea añadir
+			//Si es a countries, preguntar el nombre
+			//Crear un nuevo objeto countries
+			//Actualizar la información con el método UpdateData de ControlerDAO
+			
 			break;
 		case "search":
-			//System.out.println("Buscar presionado");
-			boolean isLoaded = ControllerDAO.getPropertiesDAO().isFileLoaded();
-			if(isLoaded) {
-				String searchKey = WindowTool.getDataWindow("Ingrese la variable a buscar");
-				String response = ControllerDAO.getPropertiesDAO().readData(searchKey);
-				WindowTool.showWindow("Valor: " + response);
-			}else {
-				WindowTool.showWindow("Debe cargar un archivo primero");
-			}
-			
+			System.out.println("Buscar presionado");
 			break;
 		case "modify":
 			System.out.println("Modificar presionado");
