@@ -2,12 +2,16 @@ package co.edu.unbosque.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 
 import co.edu.unbosque.view.MainView;
 import co.edu.unbosque.view.WindowView;
 import co.edu.unbosque.model.persistence.*;
+import co.edu.unbosque.model1.AppDTO;
+import co.edu.unbosque.model1.Countries;
+import co.edu.unbosque.model1.Friends;
 
 public class Controller implements ActionListener{
 	
@@ -15,11 +19,15 @@ public class Controller implements ActionListener{
 	private MainView mainView;
 	private ControllerDAO ControllerDAO;
 	
+	private AppDTO appDTO;
+	
 	public Controller() {
+		
 		
 		WindowTool = new WindowView();
 		mainView = new MainView();
 		ControllerDAO = new ControllerDAO();
+		appDTO = new AppDTO();
 		funcionar();
 		
 	}
@@ -51,7 +59,41 @@ public class Controller implements ActionListener{
 		String command = e.getActionCommand();
 		switch(command) {
 		case "add":
-			System.out.println("Añadir presionado");
+			ControllerDAO.setBinaries();
+			//System.out.println("Añadir presionado");
+			
+			String ref = WindowTool.getDataWindow("A qué categoria le desea añadir");
+			if(ref.equals("countries")) {//Hay que ponerlo en español
+				String newCountry = WindowTool.getDataWindow("Qué pais va a agregar");
+				Countries country = new Countries(newCountry);
+				ControllerDAO.add(ref, country, null, null);
+				ArrayList<Countries>countriesList = new ArrayList<>();
+				countriesList = appDTO.getCountriesDB();
+				ControllerDAO.updateData(ref, countriesList, null, null);
+			
+			}else if(ref.equals("friends")) {
+				
+				
+				String name = WindowTool.getDataWindow("Amigo a agregar");
+				String country = WindowTool.getDataWindow("Pais");
+				String phoneNumber = WindowTool.getDataWindow("Número de celular");
+				String email = WindowTool.getDataWindow("Correo electronico");
+				Friends friend = new Friends(name, country, phoneNumber, email);
+				ControllerDAO.add(ref, null, friend, null);
+				ArrayList<Friends>friendsList = new ArrayList<Friends>();
+				friendsList = appDTO.getFriendsDB();
+				ControllerDAO.updateData(ref, null, friendsList, null);
+				
+				for(Friends x : friendsList) {
+					System.out.println(x);
+				}
+				
+			}else if(ref.equals("contacts")) {
+				System.out.println("Contacts");
+			}else {
+				WindowTool.showWindow("Escriba una opción valida");
+			}
+			
 			//Preguntar a qué categoría desea añadir
 			//Si es a countries, preguntar el nombre
 			//Crear un nuevo objeto countries
@@ -65,7 +107,10 @@ public class Controller implements ActionListener{
 			System.out.println("Modificar presionado");
 			break;
 		case "delete":
-			System.out.println("Borrar presionado");
+			ref = WindowTool.getDataWindow("En qué categoria va a eliminar elementos");
+			String keyword = WindowTool.getDataWindow("Valor del atributo");//Hay que cambiar el texto
+			ControllerDAO.delete(ref, keyword);
+			//System.out.println("Borrar presionado");
 			break;
 		case "loadData":
 			System.out.println("Ver datos presionado");
