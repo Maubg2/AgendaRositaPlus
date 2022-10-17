@@ -59,7 +59,6 @@ public class Controller implements ActionListener{
 		String command = e.getActionCommand();
 		switch(command) {
 		case "add":
-			ControllerDAO.setBinaries();
 			//System.out.println("Añadir presionado");
 			
 			String ref = WindowTool.getDataWindow("A qué categoria le desea añadir");
@@ -69,7 +68,11 @@ public class Controller implements ActionListener{
 				ControllerDAO.add(ref, country, null, null);
 				ArrayList<Countries>countriesList = new ArrayList<>();
 				countriesList = appDTO.getCountriesDB();
-				ControllerDAO.updateData(ref, countriesList, null, null);
+				//ControllerDAO.updateData(ref, countriesList, null, null);
+				
+				for(Countries x : countriesList) {
+					System.out.println(x);
+				}
 			
 			}else if(ref.equals("friends")) {
 				
@@ -80,16 +83,16 @@ public class Controller implements ActionListener{
 				String email = WindowTool.getDataWindow("Correo electronico");
 				Friends friend = new Friends(name, country, phoneNumber, email);
 				ControllerDAO.add(ref, null, friend, null);
-				ArrayList<Friends>friendsList = new ArrayList<Friends>();
-				friendsList = appDTO.getFriendsDB();
-				ControllerDAO.updateData(ref, null, friendsList, null);
+				ArrayList<Friends>friendsList = appDTO.getFriendsDB();
+				//friendsList = appDTO.getFriendsDB();
+				//ControllerDAO.updateData(ref, null, friendsList, null);
 				
 				for(Friends x : friendsList) {
 					System.out.println(x);
 				}
 				
 			}else if(ref.equals("contacts")) {
-				System.out.println("Contacts");
+				String name = WindowTool.getDataWindow("");
 			}else {
 				WindowTool.showWindow("Escriba una opción valida");
 			}

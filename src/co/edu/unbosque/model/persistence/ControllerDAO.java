@@ -49,29 +49,7 @@ public class ControllerDAO {
 	 * @param contactsDB
 	 */
 
-	public void updateData(String ref, ArrayList<Countries> countriesDB, ArrayList<Friends> friendsDB, ArrayList<WorkContacts> contactsDB) { 
-		
-		ref = ref.toLowerCase(); //Palabra clave a usar al llamar al método, la palabra clave se debe pedir en la vista con una ventana emergente: "Qué categoría desea modificar?"
-		switch(ref) {
-		case "countries":
-			AppDTO.setCountriesDB(countriesDB); //Actualizar datos en la central
-			CountriesBin.loadCountry(AppDTO.getCountriesDB()); //Cargar al binario la información de la central actualizada
-			break;
-		case "friends":
-			AppDTO.setFriendsDB(friendsDB);
-			FriendsBin.loadFriends(AppDTO.getFriendsDB());
-			break;
-		case "contacts":
-			AppDTO.setWorkContactsDB(contactsDB);
-			WorkContactsBin.loadWorkContacts(AppDTO.getWorkContactsDB());
-			break;
-		}
-		
-		/* Eliminado porque tocaría crear un CRUD por cada binario, serían 12 métodos y no es óptimo
-		AppDTO.setCountriesDB(data); //Actualizar la central
-		CountriesBin.loadCountry(AppDTO.getCountriesDB()); //Actualizar el binario con los nuevos datos de la central
-		*/
-	}
+	
 	
 	/**
 	 * <h2>Añadir</h2>
