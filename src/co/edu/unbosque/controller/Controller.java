@@ -12,6 +12,7 @@ import co.edu.unbosque.model.persistence.*;
 import co.edu.unbosque.model1.AppDTO;
 import co.edu.unbosque.model1.Countries;
 import co.edu.unbosque.model1.Friends;
+import co.edu.unbosque.model1.WorkContacts;
 
 public class Controller implements ActionListener{
 	
@@ -70,9 +71,6 @@ public class Controller implements ActionListener{
 				countriesList = appDTO.getCountriesDB();
 				//ControllerDAO.updateData(ref, countriesList, null, null);
 				
-				for(Countries x : countriesList) {
-					System.out.println(x);
-				}
 			
 			}else if(ref.equals("friends")) {
 				
@@ -87,12 +85,17 @@ public class Controller implements ActionListener{
 				//friendsList = appDTO.getFriendsDB();
 				//ControllerDAO.updateData(ref, null, friendsList, null);
 				
-				for(Friends x : friendsList) {
-					System.out.println(x);
-				}
-				
 			}else if(ref.equals("contacts")) {
+				
 				String name = WindowTool.getDataWindow("");
+				String business = WindowTool.getDataWindow("");
+				String country = WindowTool.getDataWindow("");
+				String phoneManager = WindowTool.getDataWindow("");
+				String email = WindowTool.getDataWindow("");
+				WorkContacts workContacts = new WorkContacts(name, business, country, phoneManager, email);
+				ControllerDAO.add(ref, null, null, workContacts);
+				ArrayList<WorkContacts>contactsList = appDTO.getWorkContactsDB();
+
 			}else {
 				WindowTool.showWindow("Escriba una opción valida");
 			}

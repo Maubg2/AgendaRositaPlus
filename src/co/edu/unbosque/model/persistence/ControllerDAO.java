@@ -67,6 +67,9 @@ public class ControllerDAO {
 			
 			ArrayList<Countries> countriesDB = AppDTO.getCountriesDB();//Traer la base de datos
 			countriesDB.add(country); //Agregar el objeto correspondiente a su array
+			for(Countries x : countriesDB) {
+				System.out.println(x);
+			}
 			AppDTO.setCountriesDB(countriesDB);//Actualizar central de datos
 			CountriesBin.loadCountry(AppDTO.getCountriesDB()); //Actualizar binario con los datos actualizados de la central
 			
@@ -75,6 +78,9 @@ public class ControllerDAO {
 			
 			ArrayList<Friends> friendsDB = AppDTO.getFriendsDB();
 			friendsDB.add(friend);
+			for(Friends x : friendsDB) {
+				System.out.println(x);
+			}
 			AppDTO.setFriendsDB(friendsDB);
 			FriendsBin.loadFriends(AppDTO.getFriendsDB());
 			
@@ -83,6 +89,9 @@ public class ControllerDAO {
 			
 			ArrayList<WorkContacts> contactsDB = AppDTO.getWorkContactsDB();
 			contactsDB.add(contact);
+			for(WorkContacts x : contactsDB) {
+				System.out.println(x);
+			}
 			AppDTO.setWorkContactsDB(contactsDB);
 			WorkContactsBin.loadWorkContacts(AppDTO.getWorkContactsDB());
 			
