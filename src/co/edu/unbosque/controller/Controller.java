@@ -2,6 +2,7 @@ package co.edu.unbosque.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
@@ -20,7 +21,6 @@ public class Controller implements ActionListener{
 	private MainView mainView;
 	private ControllerDAO ControllerDAO;
 	
-	private AppDTO appDTO;
 	
 	public Controller() {
 		
@@ -28,7 +28,6 @@ public class Controller implements ActionListener{
 		WindowTool = new WindowView();
 		mainView = new MainView();
 		ControllerDAO = new ControllerDAO();
-		appDTO = new AppDTO();
 		funcionar();
 		
 	}
@@ -60,62 +59,115 @@ public class Controller implements ActionListener{
 		String command = e.getActionCommand();
 		switch(command) {
 		case "add":
-			//System.out.println("Añadir presionado");
 			
-			String ref = WindowTool.getDataWindow("A qué categoria le desea añadir");
-			if(ref.equals("countries")) {//Hay que ponerlo en español
-				String newCountry = WindowTool.getDataWindow("Qué pais va a agregar");
-				Countries country = new Countries(newCountry);
-				ControllerDAO.add(ref, country, null, null);
-				ArrayList<Countries>countriesList = new ArrayList<>();
-				countriesList = appDTO.getCountriesDB();
-				//ControllerDAO.updateData(ref, countriesList, null, null);
-				
+			boolean isLoaded = ControllerDAO.getPropertiesDAO().isFileLoaded();
 			
-			}else if(ref.equals("friends")) {
+			if(isLoaded) {
+				String ref = WindowTool.getDataWindow("A qué categoria le desea añadir");
+				ref = ref.toLowerCase();
 				
+				if(ref.equals("paises")) {//Hay que ponerlo en español
+					
+					String newCountry = WindowTool.getDataWindow("Qué pais va a agregar");
+					Countries country = new Countries(newCountry);
+					ControllerDAO.add(ref, country, null, null);
+					ArrayList<Countries>countriesList = ControllerDAO.getAppDTO().getCountriesDB();
+					//countriesList = appDTO.getCountriesDB();
+					//countriesList = ControllerDAO.getAppDTO().getCountriesDB();
+					//ControllerDAO.updateData(ref, countriesList, null, null);
+					
+				}else if(ref.equals("amigos")) {
+					
+					String name = WindowTool.getDataWindow("Agregar amigo: ");
+					String country = WindowTool.getDataWindow("Agregar Pais: ");
+					String phoneNumber = WindowTool.getDataWindow("Agregar número de celular: ");
+					String email = WindowTool.getDataWindow("Agregar correo electronico: ");
+					Friends friend = new Friends(name, country, phoneNumber, email);
+					ControllerDAO.add(ref, null, friend, null);
+					ArrayList<Friends>friendsList = ControllerDAO.getAppDTO().getFriendsDB();
+					//friendsList = appDTO.getFriendsDB();
+					//ControllerDAO.updateData(ref, null, friendsList, null);
+					
+				}else if(ref.equals("contactos")) {
+					
+					String name = WindowTool.getDataWindow("Agregar nombre: ");
+					String business = WindowTool.getDataWindow("Agregar empresa: ");
+					String country = WindowTool.getDataWindow("Agregar pais: ");
+					String phoneManager = WindowTool.getDataWindow("Agregar telefono del manager: ");
+					String email = WindowTool.getDataWindow("Agregar correo electronico: ");
+					WorkContacts workContacts = new WorkContacts(name, business, country, phoneManager, email);
+					ControllerDAO.add(ref, null, null, workContacts);
+					ArrayList<WorkContacts>contactsList = ControllerDAO.getAppDTO().getWorkContactsDB();		
+					
+				}else {
+					WindowTool.showWindow("Escriba una opción valida (paises, amigos o contactos)");
+				}
 				
-				String name = WindowTool.getDataWindow("Amigo a agregar");
-				String country = WindowTool.getDataWindow("Pais");
-				String phoneNumber = WindowTool.getDataWindow("Número de celular");
-				String email = WindowTool.getDataWindow("Correo electronico");
-				Friends friend = new Friends(name, country, phoneNumber, email);
-				ControllerDAO.add(ref, null, friend, null);
-				ArrayList<Friends>friendsList = appDTO.getFriendsDB();
-				//friendsList = appDTO.getFriendsDB();
-				//ControllerDAO.updateData(ref, null, friendsList, null);
-				
-			}else if(ref.equals("contacts")) {
-				
-				String name = WindowTool.getDataWindow("");
-				String business = WindowTool.getDataWindow("");
-				String country = WindowTool.getDataWindow("");
-				String phoneManager = WindowTool.getDataWindow("");
-				String email = WindowTool.getDataWindow("");
-				WorkContacts workContacts = new WorkContacts(name, business, country, phoneManager, email);
-				ControllerDAO.add(ref, null, null, workContacts);
-				ArrayList<WorkContacts>contactsList = appDTO.getWorkContactsDB();
-
+				//Preguntar a qué categoría desea añadir
+				//Si es a countries, preguntar el nombre
+				//Crear un nuevo objeto countries
+				//Actualizar la información con el método UpdateData de ControlerDAO
 			}else {
-				WindowTool.showWindow("Escriba una opción valida");
+				WindowTool.showWindow("Primero debe cargar el archivo");
 			}
-			
-			//Preguntar a qué categoría desea añadir
-			//Si es a countries, preguntar el nombre
-			//Crear un nuevo objeto countries
-			//Actualizar la información con el método UpdateData de ControlerDAO
 			
 			break;
 		case "search":
-			System.out.println("Buscar presionado");
+			
+			isLoaded = ControllerDAO.getPropertiesDAO().isFileLoaded();
+			
+			if(isLoaded) {
+				String ref = WindowTool.getDataWindow("En qué categoria va a buscar");
+				String keyword = WindowTool.getDataWindow("Valor a buscar: ");
+				Object res = ControllerDAO.search(ref, keyword);
+				
+				if(res != null) {
+					WindowTool.showWindow("Busca a: " + "\n" + res);
+				}else {
+					WindowTool.showWindow("No se encontró ningún valor");
+				}
+				
+			}else{
+				WindowTool.showWindow("Primero debe cargar el archivo");
+			}
+			
 			break;
 		case "modify":
-			System.out.println("Modificar presionado");
+			
+			isLoaded = ControllerDAO.getPropertiesDAO().isFileLoaded();
+			
+			if(isLoaded) {
+				String ref = WindowTool.getDataWindow("Qué categoria desea modificar");
+				String keyword = WindowTool.getDataWindow("Valor a modificar");
+				String atribute = WindowTool.getDataWindow("Atributo que quiere modificar");
+				String newValue = WindowTool.getDataWindow("Escriba el nuevo valor");
+				boolean res = ControllerDAO.modify(ref, keyword, atribute, newValue);
+				
+				if(res) {
+					WindowTool.showWindow("Modificado correctamente");
+					
+				//	ArrayList<Countries> countriesDB = ControllerDAO.getAppDTO().getCountriesDB();
+				//	for(Countries x : countriesDB) {
+				//		System.out.println(x);
+				//	}
+					
+				/*	ArrayList<Friends> amigosDB = ControllerDAO.getAppDTO().getFriendsDB();
+						for(Friends x : amigosDB) {
+							System.out.println(x);
+					}*/
+				}else {
+					WindowTool.showWindow("El valor ya existe");
+				}
+				
+			}else {
+				WindowTool.showWindow("Primero debe cargar el archivo");
+			}
+			
 			break;
 		case "delete":
-			ref = WindowTool.getDataWindow("En qué categoria va a eliminar elementos");
-			String keyword = WindowTool.getDataWindow("Valor del atributo");//Hay que cambiar el texto
-			ControllerDAO.delete(ref, keyword);
+			String ref1 = WindowTool.getDataWindow("En qué categoria va a eliminar elementos");
+			String keyword1 = WindowTool.getDataWindow("Valor del atributo");//Hay que cambiar el texto
+			ControllerDAO.delete(ref1, keyword1);
 			//System.out.println("Borrar presionado");
 			break;
 		case "loadData":
