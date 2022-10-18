@@ -65,8 +65,8 @@ public class WorkContacts implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Nombre: " + name + ", empresa: " + business + ", pais: " + country + ", telefono del manager: "
-				+ phoneManager + ", correo electronico: " + email;
+		return "Nombre: " + name + "\nEmpresa: " + business + "\nPais: " + country + "\nTelefono del manager: "
+				+ phoneManager + "\nCorreo electronico: " + email + "\n";
 	}
 
 }

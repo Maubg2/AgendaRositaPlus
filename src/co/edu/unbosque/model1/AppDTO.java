@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class AppDTO {
 	//Central de datos
-	private ArrayList<Countries> countriesDB;
-	private ArrayList<Friends> friendsDB;
-	private ArrayList<WorkContacts> workContactsDB;
+	private ArrayList<Countries> countriesDB = new ArrayList<Countries>();
+	private ArrayList<Friends> friendsDB = new ArrayList<Friends>();
+	private ArrayList<WorkContacts> workContactsDB = new ArrayList<WorkContacts>();
 	
 	public AppDTO() {
 		System.out.println("Funciona");

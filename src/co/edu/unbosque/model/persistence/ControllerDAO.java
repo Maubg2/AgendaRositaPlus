@@ -49,29 +49,7 @@ public class ControllerDAO {
 	 * @param contactsDB
 	 */
 
-	public void updateData(String ref, ArrayList<Countries> countriesDB, ArrayList<Friends> friendsDB, ArrayList<WorkContacts> contactsDB) { 
-		
-		ref = ref.toLowerCase(); //Palabra clave a usar al llamar al método, la palabra clave se debe pedir en la vista con una ventana emergente: "Qué categoría desea modificar?"
-		switch(ref) {
-		case "countries":
-			AppDTO.setCountriesDB(countriesDB); //Actualizar datos en la central
-			CountriesBin.loadCountry(AppDTO.getCountriesDB()); //Cargar al binario la información de la central actualizada
-			break;
-		case "friends":
-			AppDTO.setFriendsDB(friendsDB);
-			FriendsBin.loadFriends(AppDTO.getFriendsDB());
-			break;
-		case "contacts":
-			AppDTO.setWorkContactsDB(contactsDB);
-			WorkContactsBin.loadWorkContacts(AppDTO.getWorkContactsDB());
-			break;
-		}
-		
-		/* Eliminado porque tocaría crear un CRUD por cada binario, serían 12 métodos y no es óptimo
-		AppDTO.setCountriesDB(data); //Actualizar la central
-		CountriesBin.loadCountry(AppDTO.getCountriesDB()); //Actualizar el binario con los nuevos datos de la central
-		*/
-	}
+	
 	
 	/**
 	 * <h2>Añadir</h2>
@@ -85,33 +63,71 @@ public class ControllerDAO {
 		
 		ref = ref.toLowerCase();
 		switch(ref) {
-		case "countries":
+		case "paises", "pais":
 			
 			ArrayList<Countries> countriesDB = AppDTO.getCountriesDB();//Traer la base de datos
 			countriesDB.add(country); //Agregar el objeto correspondiente a su array
+			for(Countries x : countriesDB) {
+				System.out.println(x);
+			}
 			AppDTO.setCountriesDB(countriesDB);//Actualizar central de datos
 			CountriesBin.loadCountry(AppDTO.getCountriesDB()); //Actualizar binario con los datos actualizados de la central
 			
 			break;
-		case "friends":
+		case "amigos":
 			
 			ArrayList<Friends> friendsDB = AppDTO.getFriendsDB();
 			friendsDB.add(friend);
+			for(Friends x : friendsDB) {
+				System.out.println(x);
+			}
 			AppDTO.setFriendsDB(friendsDB);
 			FriendsBin.loadFriends(AppDTO.getFriendsDB());
 			
 			break;
-		case "contacts":
+		case "contactos":
 			
 			ArrayList<WorkContacts> contactsDB = AppDTO.getWorkContactsDB();
 			contactsDB.add(contact);
+			for(WorkContacts x : contactsDB) {
+				System.out.println(x);
+			}
 			AppDTO.setWorkContactsDB(contactsDB);
 			WorkContactsBin.loadWorkContacts(AppDTO.getWorkContactsDB());
 			
 			break;
 		}
 	}
-	
+	public boolean modifyCountries(String ref, String keyword, String newValue) {
+		ref = ref.toLowerCase();
+		keyword = keyword.toLowerCase();
+		
+		boolean found = false;
+		boolean legal = true;
+		
+		//Traer la base de datos
+		ArrayList<Countries> countriesDB = AppDTO.getCountriesDB();
+
+		//Verificar que el valor nuevo no esté repetido
+		for(Countries x : countriesDB) {
+			if(x.getCountry().equals(newValue)) {
+				legal = false; //El valor a poner ya lo tiene otro objeto
+			}
+		}
+		//Buscar el objeto por su atributo único
+		if(legal) { //Si el valor nuevo no está repetido
+			for(Countries x : countriesDB) {
+				if(x.getCountry().toLowerCase().equals(keyword)) {
+					x.setCountry(newValue);
+					found = true;
+					break;
+				}
+			}
+			return found; //True si lo encuentra, false si no lo encuentra
+		}else {
+			return found; //false, el valor a poner ya existe, por lo que ni buscó el objeto
+		}
+	}
 	public boolean modify(String ref, String keyword, String attribute, String newValue ) { //ref es la categoría a modificar, keyword es el valor del atributo único para ubicar el objeto, attribute es la variable a modificar
 		ref = ref.toLowerCase();
 		keyword = keyword.toLowerCase();
@@ -121,7 +137,7 @@ public class ControllerDAO {
 							  //              												  False: Está repetido
 		
 		switch(ref) {
-		case "countries":
+		case "paises":
 			//Traer la base de datos
 			ArrayList<Countries> countriesDB = AppDTO.getCountriesDB();
 
@@ -134,7 +150,7 @@ public class ControllerDAO {
 			//Buscar el objeto por su atributo único
 			if(legal) { //Si el valor nuevo no está repetido
 				for(Countries x : countriesDB) {
-					if(x.getCountry().equals(keyword)) {
+					if(x.getCountry().toLowerCase().equals(keyword)) {
 						x.setCountry(newValue);
 						found = true;
 						break;
@@ -145,12 +161,12 @@ public class ControllerDAO {
 				return found; //false, el valor a poner ya existe, por lo que ni buscó el objeto
 			}
 		
-		case "friends":
+		case "amigos":
 			//Traer la base de datos
 			ArrayList<Friends> friendsDB = AppDTO.getFriendsDB();
 			
 			//Verificar que el valor nuevo no esté repetido en el atributo único
-			if(attribute.equals("name")) { //Si está intentando modificar el atributo único
+			if(attribute.equals("nombre")) { //Si está intentando modificar el atributo único
 				for(Friends x : friendsDB) {
 					if(x.getName().equals(newValue)) { //El atributo único de friends es name
 						legal = false;  //El newValue ya existe
@@ -164,21 +180,21 @@ public class ControllerDAO {
 				if(x.getName().equals(keyword)) { //Si encuentra el objeto
 					//Ver cual es el atributo que quiere modificar de este objeto
 					switch(attribute) {
-					case "name": //Busca actualizar el atributo único
+					case "nombre": //Busca actualizar el atributo único
 						if(legal) { //El newValue no está repetido, se puede poner
 							found = true;
 							x.setName(newValue);
 						}
 						break;
-					case "country": //Busca actualizar country
+					case "pais": //Busca actualizar country
 						x.setCountry(newValue); //Actualizar el atributo
 						found = true;
 						break;
-					case "phonenumber":
+					case "telefono":
 						x.setPhoneNumber(newValue);
 						found = true;
 						break;
-					case "email":
+					case "correo":
 						x.setEmail(newValue);
 						found = true;
 						break;
@@ -201,12 +217,12 @@ public class ControllerDAO {
 			}
 			
 			
-		case "contacts":
+		case "contactos":
 			//Traer la base de datos
 			ArrayList<WorkContacts> contactsDB = AppDTO.getWorkContactsDB();
 			
 			//Verificar si newValue ya existe en su atributo único
-			if(attribute.equals("name")) { //El atributo único de WorkContacts es name
+			if(attribute.equals("nombre")) { //El atributo único de WorkContacts es name
 				for(WorkContacts x : contactsDB) {
 					if(x.getName().equals(newValue)) {
 						legal = false; //newValue ya es valor de un atributo único
@@ -220,26 +236,26 @@ public class ControllerDAO {
 				if(x.getName().equals(keyword)) {
 					//Se encontró el objeto, ahora a ver cuál atributo desea modificar
 					switch(attribute) {
-					case "name":
+					case "nombre":
 						if(legal) { //newValue no está repetido en los atributos únicos, se puede poner
 							x.setName(newValue);
 							found = true;
 						}
 						break;
 					
-					case "business":
+					case "empresa":
 						x.setBusiness(newValue);
 						found = true;
 						break;
-					case "country": 
+					case "pais": 
 						x.setCountry(newValue);
 						found = true;
 						break;
-					case "phonemanager":
+					case "telefono":
 						x.setPhoneManager(newValue);
 						found = true;
 						break;
-					case "email":
+					case "correo":
 						x.setEmail(newValue);
 						found = true;
 						break;
@@ -272,36 +288,40 @@ public class ControllerDAO {
 	
 	public Object search(String ref, String keyword) { //Ref es la categoría (countries, friends, etc) y keyword es el valor del atributo único para buscar
 		ref = ref.toLowerCase();
-		keyword = keyword.toLowerCase();
-		
+		keyword = keyword.toLowerCase(); //No se puede hacer esto, ya que en el archivo inicia en Mayusculas
+		String search = "";							//A menos que "x.getCountry" se convierta antes
 		switch(ref) {
-		case "countries":
+		case "paises":
 			//Traer base de datos
 			ArrayList<Countries> countriesDB = AppDTO.getCountriesDB();
 			//Buscar el objeto por su atributo único
 			for(Countries x : countriesDB) {
-				if(x.getCountry().equals(keyword)) { //country es el atributo único de Countries
+				search = x.getCountry().toLowerCase();
+				if(search.equals(keyword)) { //country es el atributo único de Countries
 					return x;
 				}
 			}
+			System.out.println("null(Desde el método)");
 			return null; //No se encontró el objeto
 			
-		case "friends":
+		case "amigos":
 			//Traer base de datos
 			ArrayList<Friends> friendsDB = AppDTO.getFriendsDB();
 			//Buscar el objeto por su atributo único
 			for(Friends x : friendsDB) {
-				if(x.getName().equals(keyword)) { //name es el atributo único de friends
+				search = x.getName().toLowerCase();
+				if(search.equals(keyword)) { //name es el atributo único de friends
 					return x;
 				}
 			}
 			return null; //No se encontró el objeto
 			
-		case "contacts":
+		case "contactos":
 			ArrayList<WorkContacts> contactsDB = AppDTO.getWorkContactsDB();
 			
 			for(WorkContacts x : contactsDB) {
-				if(x.getName().equals(keyword)) { //name es el atributo único de WorkContacts
+				search = x.getName().toLowerCase();
+				if(search.equals(keyword)) { //name es el atributo único de WorkContacts
 					return x;
 				}
 			}
@@ -320,12 +340,12 @@ public class ControllerDAO {
 		boolean deleted = false;
 		
 		switch(ref) {
-		case "countries":
+		case "paises":
 			//Traer base de datos
 			ArrayList<Countries> countriesDB = AppDTO.getCountriesDB();
 			//Buscar el objeto por su atributo único
 			for(Countries x : countriesDB) {
-				if(x.getCountry().equals(keyword)) { //country es el atributo único de Countries
+				if(x.getCountry().toLowerCase().equals(keyword)) { //country es el atributo único de Countries
 					countriesDB.remove(x);
 					deleted = true;
 					return deleted;
@@ -333,12 +353,12 @@ public class ControllerDAO {
 			}
 			return deleted; //No se encontró el objeto, por lo que no se borró nada
 			
-		case "friends":
+		case "amigos":
 			//Traer base de datos
 			ArrayList<Friends> friendsDB = AppDTO.getFriendsDB();
 			//Buscar el objeto por su atributo único
 			for(Friends x : friendsDB) {
-				if(x.getName().equals(keyword)) { //name es el atributo único de friends
+				if(x.getName().toLowerCase().equals(keyword)) { //name es el atributo único de friends
 					friendsDB.remove(x);
 					deleted = true;
 					return deleted;
@@ -346,12 +366,12 @@ public class ControllerDAO {
 			}
 			return deleted; 
 			
-		case "contacts": 
+		case "contactos": 
 			//La misma lógica de los anteriores
 			ArrayList<WorkContacts> contactsDB = AppDTO.getWorkContactsDB();
 			
 			for(WorkContacts x : contactsDB) {
-				if(x.getName().equals(keyword)) { //name es el atributo único de WorkContacts
+				if(x.getName().toLowerCase().equals(keyword)) { //name es el atributo único de WorkContacts
 					contactsDB.remove(x);
 					deleted = true;
 					return deleted;
@@ -369,4 +389,13 @@ public class ControllerDAO {
 	public PropertiesDAO getPropertiesDAO() {
 		return this.PropDAO;
 	}
+
+	public AppDTO getAppDTO() {
+		return AppDTO;
+	}
+
+	public void setAppDTO(AppDTO appDTO) {
+		AppDTO = appDTO;
+	}
+	
 }

@@ -3,10 +3,15 @@ package co.edu.unbosque.view;
 import java.awt.Color;
 import java.io.File;
 import java.io.FileFilter;
+import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import co.edu.unbosque.model1.Countries;
+import co.edu.unbosque.model1.Friends;
+import co.edu.unbosque.model1.WorkContacts;
 
 public class MainView extends JFrame{
 	
@@ -38,7 +43,7 @@ public class MainView extends JFrame{
 		getContentPane().add(titlePanel);
 		
 		filePanel = new PFile();
-		filePanel.setBounds(400, 100, 400, 500);
+		filePanel.setBounds(210, 100, 550, 850);
 		getContentPane().add(filePanel);
 		
 		buttonsPanel = new PButtons();
@@ -64,6 +69,44 @@ public class MainView extends JFrame{
 		}
 		
 		return response;
+	}
+	
+	public void loadTextArea(ArrayList<Countries> countriesDB, ArrayList<Friends> friendsDB, ArrayList<WorkContacts> contactsDB) {
+		
+		if(countriesDB != null) {
+			for(Countries x : countriesDB) {
+				filePanel.writeCountriesArea(x.toString());
+			}
+		}
+		
+		if(friendsDB != null) {
+			for(Friends x : friendsDB) {
+				filePanel.writefriendsArea(x.toString());
+			}
+		}
+		
+		if(contactsDB != null) {
+			for(WorkContacts x : contactsDB) {
+				filePanel.writeContactsArea(x.toString());
+			}
+		}
+		
+		//filePanel.getFriendsArea()
+	}
+	
+	public void updateTextArea(Countries newCountry, Friends newFriend, WorkContacts newWorkContact) {
+		
+		if(newCountry != null) {
+			filePanel.writeCountriesArea(filePanel.getCountriesArea().getText() + "\n" + newCountry.toString());
+		}
+		
+		if(newFriend != null) {
+			filePanel.writefriendsArea(filePanel.getFriendsArea().getText() + "\n" + newFriend.toString());
+		}
+		
+		if(newWorkContact != null) {
+			filePanel.writeContactsArea(filePanel.getContactsArea().getText() + "\n" + newWorkContact.toString());
+		}
 	}
 
 	public PTitle getTitlePanel() {
