@@ -14,6 +14,8 @@ public class PFile extends JPanel{
 	
 	//private JTextArea textArea;
 	
+	
+
 	private JTextArea countriesArea;
 	private JLabel countriesLabel;
 	private JTextArea friendsArea;
@@ -130,6 +132,69 @@ public class PFile extends JPanel{
 
 	public void setLoadedValue(String loadedValue) {
 		this.loadedValue.setText(loadedValue);
+	}
+	
+	public JTextArea getCountriesArea() {
+		return countriesArea;
+	}
+
+	public void writeCountriesArea(String value) {
+		String actualValue = countriesArea.getText();
+		countriesArea.setText(actualValue + "\n" + value);
+	}
+
+	public JLabel getCountriesLabel() {
+		return countriesLabel;
+	}
+
+	public void setCountriesLabel(JLabel countriesLabel) {
+		this.countriesLabel = countriesLabel;
+	}
+
+	public JTextArea getFriendsArea() {
+		return friendsArea;
+	}
+
+	public void writefriendsArea(String value) {
+		String actualValue = friendsArea.getText();
+		friendsArea.setText(actualValue + "\n" + value);
+	}
+
+	public JLabel getFriendsLabel() {
+		return friendsLabel;
+	}
+
+	public void setFriendsLabel(JLabel friendsLabel) {
+		this.friendsLabel = friendsLabel;
+	}
+
+	public JTextArea getContactsArea() {
+		return contactsArea;
+	}
+
+	public void writeContactsArea(String value) {
+		String actualValue = contactsArea.getText();
+		contactsArea.setText(actualValue + "\n" + value);
+	}
+
+	public JLabel getContactsLabel() {
+		return contactsLabel;
+	}
+
+	public void setContactsLabel(JLabel contactsLabel) {
+		this.contactsLabel = contactsLabel;
+	}
+
+	public JScrollPane getAreaScroll() {
+		return areaScroll;
+	}
+
+	public void setAreaScroll(JScrollPane areaScroll) {
+		this.areaScroll = areaScroll;
+	}
+
+	public void setLoadedValue(JLabel loadedValue) {
+		this.loadedValue = loadedValue;
 	}
 
 }

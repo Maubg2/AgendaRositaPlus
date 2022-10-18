@@ -56,7 +56,7 @@ public class Friends implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Nombre: " + name + ", pais: " + country + ", numero de telefono: " + phoneNumber + ", correo electronico: " + email;
+		return "Nombre: " + name + "\nPais: " + country + "\nNumero de telefono: " + phoneNumber + "\nCorreo electronico: " + email + "\n";
 	}
 
 }

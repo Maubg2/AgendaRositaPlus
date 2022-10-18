@@ -63,7 +63,7 @@ public class ControllerDAO {
 		
 		ref = ref.toLowerCase();
 		switch(ref) {
-		case "paises":
+		case "paises", "pais":
 			
 			ArrayList<Countries> countriesDB = AppDTO.getCountriesDB();//Traer la base de datos
 			countriesDB.add(country); //Agregar el objeto correspondiente a su array
@@ -98,7 +98,36 @@ public class ControllerDAO {
 			break;
 		}
 	}
-	
+	public boolean modifyCountries(String ref, String keyword, String newValue) {
+		ref = ref.toLowerCase();
+		keyword = keyword.toLowerCase();
+		
+		boolean found = false;
+		boolean legal = true;
+		
+		//Traer la base de datos
+		ArrayList<Countries> countriesDB = AppDTO.getCountriesDB();
+
+		//Verificar que el valor nuevo no esté repetido
+		for(Countries x : countriesDB) {
+			if(x.getCountry().equals(newValue)) {
+				legal = false; //El valor a poner ya lo tiene otro objeto
+			}
+		}
+		//Buscar el objeto por su atributo único
+		if(legal) { //Si el valor nuevo no está repetido
+			for(Countries x : countriesDB) {
+				if(x.getCountry().toLowerCase().equals(keyword)) {
+					x.setCountry(newValue);
+					found = true;
+					break;
+				}
+			}
+			return found; //True si lo encuentra, false si no lo encuentra
+		}else {
+			return found; //false, el valor a poner ya existe, por lo que ni buscó el objeto
+		}
+	}
 	public boolean modify(String ref, String keyword, String attribute, String newValue ) { //ref es la categoría a modificar, keyword es el valor del atributo único para ubicar el objeto, attribute es la variable a modificar
 		ref = ref.toLowerCase();
 		keyword = keyword.toLowerCase();
