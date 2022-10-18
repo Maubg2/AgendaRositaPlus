@@ -38,7 +38,7 @@ public class MainView extends JFrame{
 		getContentPane().add(titlePanel);
 		
 		filePanel = new PFile();
-		filePanel.setBounds(400, 100, 400, 500);
+		filePanel.setBounds(210, 100, 550, 850);
 		getContentPane().add(filePanel);
 		
 		buttonsPanel = new PButtons();
