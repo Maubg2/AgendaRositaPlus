@@ -12,6 +12,13 @@ import co.edu.unbosque.model1.Countries;
 import co.edu.unbosque.model1.Friends;
 import co.edu.unbosque.model1.WorkContacts;
 
+/**
+ * <h2>Binario</h2>
+ * <p>Clase que almacena la base de los archivos binarios</p>
+ * 
+ * @author J&M Sistemas
+ *
+ */
 public class BinDAO {
 	
 	private ObjectInputStream input;
@@ -32,7 +39,11 @@ public class BinDAO {
 		}
 	}
 	
-	
+	/**
+	 * <h2>Cargar países</h2>
+	 * <p>Carga un ArrayList de tipo Countries al binario Countries.dat</p>
+	 * @param data
+	 */
 	public void loadCountry(ArrayList<Countries> data) {
 		
 		try {
@@ -47,6 +58,12 @@ public class BinDAO {
 		
 	}
 	
+	/**
+	 * <h2>Cargar amigos</h2>
+	 * <p>Carga un ArrayList de tipo Friends al binario de Friends.dat</p>
+	 * @param data
+	 */
+	
 	public void loadFriends(ArrayList<Friends> data) {
 		try {
 			FileOutputStream FOS = new FileOutputStream(file);
@@ -58,6 +75,12 @@ public class BinDAO {
 			System.out.println("Error (loadFriends)");
 		}
 	}
+	
+	/**
+	 * <h2>Cargar contactos de trabajo</h2>
+	 * <p>Carga un ArrayList de tipo WorkContacts al binario WorkContacts.bin</p>
+	 * @param data
+	 */
 	
 	public void loadWorkContacts(ArrayList<WorkContacts> data) {
 		try {

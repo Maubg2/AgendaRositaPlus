@@ -11,6 +11,15 @@ import co.edu.unbosque.model1.Countries;
 import co.edu.unbosque.model1.Friends;
 import co.edu.unbosque.model1.WorkContacts;
 
+/**
+ * <h2>DAO del archivo properties</h2>
+ * <p>
+ * Clase que contiene toda la lógica para extraer los datos del archivo .properties
+ * dado
+ * </p>
+ * @author J&M Sistemas
+ *
+ */
 public class PropertiesDAO {
 	
 	//private FileProperties FP;
@@ -25,6 +34,16 @@ public class PropertiesDAO {
 	public PropertiesDAO() {
 		
 	}
+	
+	/**
+	 * <h2>Cargar datos</h2>
+	 * <p>
+	 * Busca el archivo en la ruta especificada en los parámetros
+	 * y si no existe, crea los archivos .dat
+	 * </p>
+	 * 
+	 * @param src
+	 */
 	
 	public void loadData(String src) {
 		try {
@@ -43,9 +62,24 @@ public class PropertiesDAO {
 		
 	}
 	
+	/**
+	 * Traer una propiedad del archivo en base a una clave dada
+	 * @param key
+	 * @return
+	 */
+	
 	public String readData(String key) {
 		return prop.getProperty(key);
 	}
+	
+	/**
+	 * <h2>Archivo está cargado</h2>
+	 * <p>
+	 * Verificar si el atributo file tiene valor, retorna true si si tiene, y false si
+	 * no tiene valor
+	 * </p>
+	 * @return
+	 */
 	public boolean isFileLoaded() {
 		return (f != null) ? true : false;
 		
@@ -53,9 +87,12 @@ public class PropertiesDAO {
 	public File getFileProperties() {
 		return this.f;
 	}
-	public void loadSrcFile(String src) {
-		
-	}
+	
+	/**
+	 * <h2>Obtener datos de países</h2>
+	 * <p>Trae toda la información de la sección países del archivo properties</p>
+	 * @return
+	 */
 	
 	public ArrayList<Countries> getCountryData() {
 		ArrayList<Countries> countriesList = new ArrayList<Countries>();
@@ -88,6 +125,15 @@ public class PropertiesDAO {
 		}*/
 		return countriesList;
 	}
+	
+	/**
+	 * <h2>Traer datos de amigos</h2>
+	 * <p>
+	 * Extrae y retorna toda la información contenida en la sección amigos del
+	 * archivo .properties
+	 * </p>
+	 * @return
+	 */
 	
 	public ArrayList<Friends> getFriendsData() {
 		
@@ -130,6 +176,15 @@ public class PropertiesDAO {
 		*/
 		return closeFriends;
 	}
+	
+	/**
+	 * <h2>Traer la información de contactos</h2>
+	 * <p>
+	 * Extrae y retorna toda la información de la sección contactos de trabajo del
+	 * archivo .properties
+	 * </p>
+	 * @return
+	 */
 	
 	public ArrayList<WorkContacts> getWorkContactsData() {
 		

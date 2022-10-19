@@ -2,6 +2,15 @@ package co.edu.unbosque.model1;
 
 import java.util.ArrayList;
 
+/**
+ * <h2>DTO de la app</h2>
+ * <p>
+ * Clase que sirve como central de datos para que toda la app use la misma información
+ * y tener control de donde se guarda
+ * </p>
+ * @author J&M Sistemas
+ *
+ */
 public class AppDTO {
 	//Central de datos
 	private ArrayList<Countries> countriesDB = new ArrayList<Countries>();

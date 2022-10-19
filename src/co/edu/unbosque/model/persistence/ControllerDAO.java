@@ -4,6 +4,13 @@ import java.util.ArrayList;
 
 import co.edu.unbosque.model1.*;
 
+/**
+ * <h2>ControllerDAO</h2>
+ * <p>Clase que contiene los binarios de la aplicación, y contiene el CRUD</p>
+ * 
+ * @author J&M Sistemas
+ *
+ */
 public class ControllerDAO {
 	
 	private PropertiesDAO PropDAO;

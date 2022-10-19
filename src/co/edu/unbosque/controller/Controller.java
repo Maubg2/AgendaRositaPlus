@@ -15,12 +15,29 @@ import co.edu.unbosque.model1.Countries;
 import co.edu.unbosque.model1.Friends;
 import co.edu.unbosque.model1.WorkContacts;
 
+
+/**
+ * En esta clase se conecta la vista con el modelo, se le piden los datos al usuario
+ * con la vista, y se mandan esos datos recolectados al modelo mediante los parámetros
+ * de los métodos
+ * @author HP
+ * @see ActionListener
+ */
 public class Controller implements ActionListener{
 	
 	private WindowView WindowTool;
 	private MainView mainView;
 	private ControllerDAO ControllerDAO;
 	
+	/**
+	 * <h2>Constructor</h2>
+	 * <p>
+	 * Se instancian los objetos de vista y modelo, WindowTool es para
+	 * el manejo de ventanas emergentes, mainView es donde están todos los paneles
+	 * y ControllerDAO es donde se administran los DAOs del archivo properties y de
+	 * los binarios
+	 * </p>
+	 */
 	
 	public Controller() {
 		
@@ -38,6 +55,11 @@ public class Controller implements ActionListener{
 		//ControllerDAO.getPropertiesDAO().loadData(src);
 	}
 	
+	/**
+	 *<h2>Configurar botones</h2>
+	 *<p>Este metodo asgina los listeners a todos los botones</p> 
+	 */
+	
 	public void setButtons() {
 		mainView.getButtonsPanel().getAddButton().addActionListener(this);
 		mainView.getButtonsPanel().getAddButton().setActionCommand("add");
@@ -50,6 +72,14 @@ public class Controller implements ActionListener{
 		mainView.getButtonsPanel().getLoadFileButton().addActionListener(this);
 		mainView.getButtonsPanel().getLoadFileButton().setActionCommand("loadFile");
 	}
+	
+	/**
+	 * <h2>actionPerformed</h2>
+	 * <p>
+	 * En este metodo abstracto se dan las acciones a realizar cuando se presione
+	 * dicho boton
+	 * </p>
+	 */
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
