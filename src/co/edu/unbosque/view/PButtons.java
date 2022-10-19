@@ -9,7 +9,6 @@ public class PButtons extends JPanel{
 	private JButton searchButton;
 	private JButton modifyButton;
 	private JButton deleteButton;
-	private JButton loadData;
 	private JButton loadFile;
 	
 	//Asisgnar Action listener en controlador
@@ -28,7 +27,6 @@ public class PButtons extends JPanel{
 		searchButton = new JButton("Buscar");
 		modifyButton = new JButton("Modificar");
 		deleteButton = new JButton("Borrar");
-		loadData = new JButton("Ver datos");
 		loadFile = new JButton("Cargar archivo");
 		
 		addButton.setBounds(30, 20, 150, 20);
@@ -43,10 +41,7 @@ public class PButtons extends JPanel{
 		deleteButton.setBounds(30, 110, 150, 20);
 		add(deleteButton);
 		
-		loadData.setBounds(30, 200, 150, 20);
-		add(loadData);
-		
-		loadFile.setBounds(30, 240, 150, 20);
+		loadFile.setBounds(30, 180, 150, 20);
 		add(loadFile);
 	}
 
@@ -80,14 +75,6 @@ public class PButtons extends JPanel{
 
 	public void setDeleteButton(JButton deleteButton) {
 		this.deleteButton = deleteButton;
-	}
-
-	public JButton getLoadDataButton() {
-		return loadData;
-	}
-
-	public void setLoadDataButton(JButton loadData) {
-		this.loadData = loadData;
 	}
 
 	public JButton getLoadFileButton() {

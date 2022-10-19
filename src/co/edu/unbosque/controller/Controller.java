@@ -47,8 +47,6 @@ public class Controller implements ActionListener{
 		mainView.getButtonsPanel().getModifyButton().setActionCommand("modify");
 		mainView.getButtonsPanel().getDeleteButton().addActionListener(this);
 		mainView.getButtonsPanel().getDeleteButton().setActionCommand("delete");
-		mainView.getButtonsPanel().getLoadDataButton().addActionListener(this);
-		mainView.getButtonsPanel().getLoadDataButton().setActionCommand("loadData");
 		mainView.getButtonsPanel().getLoadFileButton().addActionListener(this);
 		mainView.getButtonsPanel().getLoadFileButton().setActionCommand("loadFile");
 	}
@@ -70,7 +68,22 @@ public class Controller implements ActionListener{
 						
 						String newCountry = WindowTool.getDataWindow("Qué pais va a agregar");
 						Countries country = new Countries(newCountry);
-						ControllerDAO.add(ref, country, null, null);
+						
+						String resFormat = ControllerDAO.checkFormat(country.getCountry(), null, null);
+						if(resFormat.equals("1")) {
+							WindowTool.showWindow("El nombre contiene caracteres ilegales");
+						}else if(resFormat.equals("0") && newCountry != null) {
+							String res = ControllerDAO.add(ref, country, null, null);
+							//Este res es para checkear si el atributo unico está repetido
+							if(res.equals("0")) 
+								WindowTool.showWindow("No se pudo añadir: El nombre está repetido");
+							else if(res.equals("1"))
+								WindowTool.showWindow("Se añadió correctamente");
+							else if(res.equals("2"))
+								WindowTool.showWindow("No se encontró la categoría");
+						
+						}
+						
 						ArrayList<Countries>countriesList = ControllerDAO.getAppDTO().getCountriesDB();
 						//countriesList = appDTO.getCountriesDB();
 						//countriesList = ControllerDAO.getAppDTO().getCountriesDB();
@@ -87,7 +100,41 @@ public class Controller implements ActionListener{
 						String phoneNumber = WindowTool.getDataWindow("Agregar número de celular: ");
 						String email = WindowTool.getDataWindow("Agregar correo electronico: ");
 						Friends friend = new Friends(name, country, phoneNumber, email);
-						ControllerDAO.add(ref, null, friend, null);
+						
+						String resFormatName = ControllerDAO.checkFormat(name, null, null);
+						boolean correctName = false;
+						String resFormatPhone = ControllerDAO.checkFormat(null, phoneNumber, null);
+						boolean correctPhone = false;
+						String resFormatEmail = ControllerDAO.checkFormat(null, null, email);
+						boolean correctEmail = false;
+						
+						if(resFormatName.equals("1")) 
+							WindowTool.showWindow("Tiene caracteres ilegales");
+						else if(resFormatName.equals("0") && name != null) 
+							correctName = true;
+						
+						if(resFormatPhone.equals("2")) 
+							WindowTool.showWindow("El telefono debería tener 9 caracteres");
+						else if(resFormatPhone.equals("3")) 
+							WindowTool.showWindow("El formato del número debería ser: xxx-xxx-xxx");
+						else if(resFormatPhone.equals("0") && phoneNumber != null)
+							correctPhone = true;
+						
+						if(resFormatEmail.equals("4")) 
+							WindowTool.showWindow("El correo debe terminar en: @xxxx.com");
+						else if(resFormatEmail.equals("0") && email != null)
+							correctEmail = true;
+						
+						if(correctName == true && correctPhone == true && correctEmail == true && country != null) {
+							String res = ControllerDAO.add(ref, null, friend, null);
+							if(res.equals("0")) 
+								WindowTool.showWindow("No se pudo añadir: El nombre está repetido");
+							else if(res.equals("1"))
+								WindowTool.showWindow("Se añadió correctamente");
+							else if(res.equals("2"))
+								WindowTool.showWindow("No se encontró la categoría");
+						}
+						
 						ArrayList<Friends>friendsList = ControllerDAO.getAppDTO().getFriendsDB();
 						//friendsList = appDTO.getFriendsDB();
 						//ControllerDAO.updateData(ref, null, friendsList, null);
@@ -104,7 +151,14 @@ public class Controller implements ActionListener{
 						String phoneManager = WindowTool.getDataWindow("Agregar telefono del manager: ");
 						String email = WindowTool.getDataWindow("Agregar correo electronico: ");
 						WorkContacts workContacts = new WorkContacts(name, business, country, phoneManager, email);
-						ControllerDAO.add(ref, null, null, workContacts);
+						String res = ControllerDAO.add(ref, null, null, workContacts);
+						//Verificar si el atributo único está repetido
+						if(res.equals("0")) 
+							WindowTool.showWindow("No se pudo añadir: El nombre está repetido");
+						else if(res.equals("1"))
+							WindowTool.showWindow("Se añadió correctamente");
+						else if(res.equals("2"))
+							WindowTool.showWindow("No se encontró la categoría");
 						ArrayList<WorkContacts>contactsList = ControllerDAO.getAppDTO().getWorkContactsDB();
 						
 						//Actualizar textArea

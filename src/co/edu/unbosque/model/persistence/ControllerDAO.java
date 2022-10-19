@@ -59,43 +59,67 @@ public class ControllerDAO {
 	 * @param friend
 	 * @param contact
 	 */
-	public void add(String ref, Countries country, Friends friend, WorkContacts contact) { //Todos los parámetros deben llenarse con null, menos ref y el objeto a añadir
-		
+	public String add(String ref, Countries country, Friends friend, WorkContacts contact) { //Todos los parámetros deben llenarse con null, menos ref y el objeto a añadir
+		//Retorna "1" si se añadió correctamente
+		//Retorna "0" si el atributo único está repetido
+		//Retorna "2" si la categoria no se encontró
 		ref = ref.toLowerCase();
+		boolean legal = true;
 		switch(ref) {
 		case "paises", "pais":
 			
 			ArrayList<Countries> countriesDB = AppDTO.getCountriesDB();//Traer la base de datos
-			countriesDB.add(country); //Agregar el objeto correspondiente a su array
 			for(Countries x : countriesDB) {
-				System.out.println(x);
+				
+				if(x.getCountry().equals(country.getCountry())) {
+					legal = false;
+				}
 			}
-			AppDTO.setCountriesDB(countriesDB);//Actualizar central de datos
-			CountriesBin.loadCountry(AppDTO.getCountriesDB()); //Actualizar binario con los datos actualizados de la central
+			if(legal) {
+				countriesDB.add(country); //Agregar el objeto correspondiente a su array
+				AppDTO.setCountriesDB(countriesDB);//Actualizar central de datos
+				CountriesBin.loadCountry(AppDTO.getCountriesDB()); //Actualizar binario con los datos actualizados de la central
+				return "1";//Añadido correctamente	
+			}else {
+				return "0";
+			}
 			
-			break;
-		case "amigos":
+		case "amigos": 
 			
 			ArrayList<Friends> friendsDB = AppDTO.getFriendsDB();
-			friendsDB.add(friend);
 			for(Friends x : friendsDB) {
-				System.out.println(x);
+				if(x.getName().equals(friend.getName())) {
+					legal = false;
+				}
 			}
-			AppDTO.setFriendsDB(friendsDB);
-			FriendsBin.loadFriends(AppDTO.getFriendsDB());
+			if(legal) {
+				friendsDB.add(friend);
+				AppDTO.setFriendsDB(friendsDB);
+				FriendsBin.loadFriends(AppDTO.getFriendsDB());
+				return "1";
+			}else {
+				return "0";
+			}
 			
-			break;
 		case "contactos":
 			
 			ArrayList<WorkContacts> contactsDB = AppDTO.getWorkContactsDB();
-			contactsDB.add(contact);
 			for(WorkContacts x : contactsDB) {
-				System.out.println(x);
+				if(x.getName().equals(contact.getName())) {
+					legal = false;
+				}
 			}
-			AppDTO.setWorkContactsDB(contactsDB);
-			WorkContactsBin.loadWorkContacts(AppDTO.getWorkContactsDB());
+			if(legal) {
+				contactsDB.add(contact);
+				AppDTO.setWorkContactsDB(contactsDB);
+				WorkContactsBin.loadWorkContacts(AppDTO.getWorkContactsDB());
+				return "1";
+			}else {
+				return "0";
+			}
 			
-			break;
+			default:
+				return "2";
 		}
 	}
 	public boolean modifyCountries(String ref, String keyword, String newValue) {
@@ -384,6 +408,53 @@ public class ControllerDAO {
 			return deleted; //false
 		}
 		
+	}
+	
+	//Si retorna un "1" es porque hay un caracter ilegal en el nombre
+	//Si retorna un "2" es porque no tiene 9 caracteres
+	//Si retorna un "3" es porque no hay guiones cada tres números
+	//Si retorna un "4" es porque el email no acaba en @hotmail.com
+	//Si retorna un "0" es porque está bien
+	public String checkFormat(String name, String phoneNumber, String email) {
+		String illegalChar[]= {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
+				"°", "|", "!", "#", "\"", "$", "%", "&", "/", "(", ")", "=", "?",
+				"'", "\\", "¡", "¿", "¨", "+", "*", "´", "~", "}", "]", "`", "{",
+				"[", "^", ",", ";", ".", ":", "-", "_", "@", "¬"};
+		if(name != null) {
+			for(String x : illegalChar) {
+				if(name.contains(x)) {
+					return "1";
+				}
+			}
+			
+		}
+		if(phoneNumber != null) {
+			int phoneSize = phoneNumber.length();
+			if(phoneSize != 11) {
+				return "2";
+			}
+			if(phoneNumber.charAt(4) != '-' && phoneNumber.charAt(8) != '-') {
+				return "3";
+			}
+		}
+		if(email != null) {
+			boolean containsArroba = false;
+			boolean containsDot = false;
+			for(char x : email.toCharArray()) {
+				if(x == '@') {
+					containsArroba = true;
+				}
+			}
+			for(char x : email.toCharArray()) {
+				if(x == '.') {
+					containsDot = true;
+				}
+			}
+			if(containsArroba == false || containsDot == false) {
+				return "4";
+			}
+		}
+		return "0";
 	}
 	
 	public PropertiesDAO getPropertiesDAO() {
