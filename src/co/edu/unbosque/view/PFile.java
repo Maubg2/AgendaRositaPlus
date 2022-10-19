@@ -10,12 +10,15 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+	/**
+	 * <p>Clase encargada de contener, instanciar y ubicar en el panel
+	 * a todos los elementos que interactuan o dan informacion de los archivos</p>
+	 * 
+	 * @author J&M Sistemas
+	 */
+
 public class PFile extends JPanel{
 	
-	//private JTextArea textArea;
-	
-	
-
 	private JTextArea countriesArea;
 	private JLabel countriesLabel;
 	private JTextArea friendsArea;

@@ -2,6 +2,15 @@ package co.edu.unbosque.model1;
 
 import java.io.Serializable;
 
+/**
+ * <h2>Clase de atributos tipo Friends</h2>
+ * <p>
+ * Estan todos los atributos, metodos setters y getters y toString de Friends
+ * </p>
+ * 
+ * @author J&M Sistemas
+ */
+
 public class Friends implements Serializable{
 
 	private static final long serialVersionUID = 1L;

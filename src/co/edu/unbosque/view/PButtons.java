@@ -3,6 +3,13 @@ package co.edu.unbosque.view;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+/**
+ * <p>Esta clase se encarga de contener, instanciar y ubicar en el panel a 
+ * todos los botones usados en el programa</P>
+ * 
+ * @author J&M Sistemas
+ */
+
 public class PButtons extends JPanel{
 	
 	private JButton addButton;

@@ -47,18 +47,6 @@ public class ControllerDAO {
 	//CRUD
 	
 	/**
-	 * <h2>Actualizar<h2>
-	 * <p>Este método sirve para actualizar la información luego de haber modificado las bases de datos, los arraylist que se piden ya deben venir modificados</p>
-	 * <p>Se piden todas las bases de datos, y segun la variable ref, se especificara cual de ellas se va a modificar</p>
-	 * @param ref
-	 * @param countriesDB
-	 * @param friendsDB
-	 * @param contactsDB
-	 */
-
-	
-	
-	/**
 	 * <h2>Añadir</h2>
 	 * <p>Método que añade un objeto a la categoría especificada en ref</p>  
 	 * @param ref

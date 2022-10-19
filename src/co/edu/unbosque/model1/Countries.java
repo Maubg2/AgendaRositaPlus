@@ -2,6 +2,16 @@ package co.edu.unbosque.model1;
 
 import java.io.Serializable;
 
+/**
+ * <h2>Clase de atributos de Countries</h2>
+ * <p>
+ * Clase que tiene como funcion contener la plantilla de los objetos tipo Countries
+ * y el toString
+ * </p>
+ * 
+ * @author J&M Sistemas
+ */
+
 public class Countries implements Serializable{
 
 	private static final long serialVersionUID = 1L;

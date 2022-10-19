@@ -2,6 +2,14 @@ package co.edu.unbosque.model1;
 
 import java.io.Serializable;
 
+/**
+ * <h2>Clase atributos tipo WorkContacts</h2>
+ * <p>
+ * En esta clase estám todos los atributos, setters y getters y metodo toString tipo WorkContacts
+ * </p>
+ * @author J&M
+ */
+
 public class WorkContacts implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

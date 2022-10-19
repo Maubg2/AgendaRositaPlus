@@ -13,6 +13,14 @@ import co.edu.unbosque.model1.Countries;
 import co.edu.unbosque.model1.Friends;
 import co.edu.unbosque.model1.WorkContacts;
 
+/**
+ * <h2>MainView</h2>
+ * <p>Clase que contiene e instancia todos los paneles del programa, 
+ * se le da valor al JFrame y contiene metodos del JFileChooser</p>
+ * 
+ * @author J&M Sistemas 
+ */
+
 public class MainView extends JFrame{
 	
 	private PTitle titlePanel;
@@ -31,8 +39,6 @@ public class MainView extends JFrame{
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setVisible(true);
-		
-		
 		
 	}
 	
@@ -58,6 +64,11 @@ public class MainView extends JFrame{
 		
 	}
 	
+	/**
+	 * <h2>Mostrar JFileChooser</h2>
+	 * <p>Metodo que muestra el JFileChooser y retorna la opcion elegida</p>
+	 * @return
+	 */
 	public String showFileChooser() {
 		String response = null;
 		int r = fileChooser.showSaveDialog(null);
@@ -70,6 +81,15 @@ public class MainView extends JFrame{
 		
 		return response;
 	}
+	
+	/**
+	 * <h2>Cargar JTextArea</h2>
+	 * <p>Metodo que muestra todos los datos contenidos en los ArrayList
+	 * en su respectivo JTextArea</p>
+	 * @param countriesDB
+	 * @param friendsDB
+	 * @param contactsDB
+	 */
 	
 	public void loadTextArea(ArrayList<Countries> countriesDB, ArrayList<Friends> friendsDB, ArrayList<WorkContacts> contactsDB) {
 		
@@ -94,6 +114,14 @@ public class MainView extends JFrame{
 		//filePanel.getFriendsArea()
 	}
 	
+	
+	/**
+	 * <h2>Actualizar JTextArea</h2>
+	 * <p>Metodo que al actualizar los ArrayList añade los nuevos datos al JTextArea</p>
+	 * @param newCountry
+	 * @param newFriend
+	 * @param newWorkContact
+	 */
 	public void updateTextArea(Countries newCountry, Friends newFriend, WorkContacts newWorkContact) {
 		
 		if(newCountry != null) {

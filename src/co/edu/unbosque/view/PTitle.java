@@ -6,6 +6,12 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * <p>Clase que contiene, instancia y ubica en el panel al titulo principal </p>
+ * 
+ * @author J&M Sistemas 
+ */
+
 public class PTitle extends JPanel{
 	
 	private JLabel mainTitle;
