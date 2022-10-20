@@ -428,7 +428,7 @@ public class ControllerDAO {
 			if(phoneSize != 11) {
 				return "2";
 			}
-			if(phoneNumber.charAt(4) != '-' && phoneNumber.charAt(8) != '-') {
+			if(phoneNumber.charAt(3) != '-' && phoneNumber.charAt(7) != '-') {
 				return "3";
 			}
 		}
