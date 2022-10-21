@@ -274,51 +274,97 @@ public class Controller implements ActionListener{
 						String keyword = WindowTool.getDataWindow("Nombre del pais a modificar");
 						String newValue = WindowTool.getDataWindow("Nombre del pais");
 						
+						String resFormat = ControllerDAO.checkFormat(newValue, null, null);
+						if(resFormat.equals("1")) {
+							WindowTool.showWindow("El nombre contiene caracteres ilegales");
+						}else if(resFormat.equals("0") && newValue != null) {
+							boolean res = ControllerDAO.modifyCountries(ref, keyword, newValue);
+							//Este res es para checkear si el atributo unico está repetido
+							if(res) {
+								WindowTool.showWindow("Pais modificado correctamente");
+								//Cargar datos en los textArea
+								mainView.getFilePanel().getFriendsArea().setText(null);
+								mainView.getFilePanel().getContactsArea().setText(null);
+								mainView.getFilePanel().getCountriesArea().setText(null);
+								mainView.loadTextArea(ControllerDAO.getAppDTO().getCountriesDB(), ControllerDAO.getAppDTO().getFriendsDB(), ControllerDAO.getAppDTO().getWorkContactsDB());
+								
+							}
 						
-						boolean res = ControllerDAO.modifyCountries(ref, keyword, newValue);
-						
-						if(res) {
-							WindowTool.showWindow("Pais modificado correctamente");
-							//Cargar datos en los textArea
-							mainView.getFilePanel().getFriendsArea().setText(null);
-							mainView.getFilePanel().getContactsArea().setText(null);
-							mainView.getFilePanel().getCountriesArea().setText(null);
-							mainView.loadTextArea(ControllerDAO.getAppDTO().getCountriesDB(), ControllerDAO.getAppDTO().getFriendsDB(), ControllerDAO.getAppDTO().getWorkContactsDB());
-							//Actualizar textArea
-						}else {
-							WindowTool.showWindow("El valor ya existe");
 						}
-						
+
 					}else if(ref.equals("amigos") || ref.equals("contactos")) {
 						String keyword = WindowTool.getDataWindow("Nombre del objeto a modificar");
 						String atribute = WindowTool.getDataWindow("Qué propiedad desea cambiar");
 						String newValue = WindowTool.getDataWindow("Ingrese el nuevo valor para " + atribute);
-						boolean res = ControllerDAO.modify(ref, keyword, atribute, newValue);
 						
-						if(res) {
-							WindowTool.showWindow("Modificado correctamente");
+						//Checkear formato
+						atribute = atribute.toLowerCase();
+						switch(atribute) {
+						case "nombre":
+							String resFormatName = ControllerDAO.checkFormat(newValue, null, null);
+							if(resFormatName.equals("1")) {
+								WindowTool.showWindow("El nombre contiene caracteres ilegales");
+								System.out.println("Caracteres ilegales");
+								break;
+							}else if(resFormatName.equals("0") && newValue != null) {
+								boolean res = ControllerDAO.modifyCountries(ref, keyword, newValue);
+								//Este res es para checkear si el atributo unico está repetido
+								if(res) {
+									WindowTool.showWindow("Pais modificado correctamente");
+									//Cargar datos en los textArea
+									mainView.getFilePanel().getFriendsArea().setText(null);
+									mainView.getFilePanel().getContactsArea().setText(null);
+									mainView.getFilePanel().getCountriesArea().setText(null);
+									mainView.loadTextArea(ControllerDAO.getAppDTO().getCountriesDB(), ControllerDAO.getAppDTO().getFriendsDB(), ControllerDAO.getAppDTO().getWorkContactsDB());
+									break;
+								}
+							}
+						case "telefono", "teléfono":
+							String resFormatPhone = ControllerDAO.checkFormat(null, newValue, null);
+							if(resFormatPhone.equals("2")) {
+								WindowTool.showWindow("El número debería tener 9 números");
+								break;
+							}else if(resFormatPhone.equals("3")) {
+								WindowTool.showWindow("El número debería ser de la forma: xxx-xxx-xxx");
+							}
+							else if(resFormatPhone.equals("0") && newValue != null) {
+								boolean res = ControllerDAO.modifyCountries(ref, keyword, newValue);
+								//Este res es para checkear si el atributo unico está repetido
+								if(res) {
+									WindowTool.showWindow("Pais modificado correctamente");
+									//Cargar datos en los textArea
+									mainView.getFilePanel().getFriendsArea().setText(null);
+									mainView.getFilePanel().getContactsArea().setText(null);
+									mainView.getFilePanel().getCountriesArea().setText(null);
+									mainView.loadTextArea(ControllerDAO.getAppDTO().getCountriesDB(), ControllerDAO.getAppDTO().getFriendsDB(), ControllerDAO.getAppDTO().getWorkContactsDB());
+									break;
+								}
+							}
+							break;
+						case "email":
+							String resFormatEmail = ControllerDAO.checkFormat(null, null, newValue);
+							if(resFormatEmail.equals("4")) {
+								WindowTool.showWindow("El email debe ser un correo válido");
+								break;
+							}
+							else if(resFormatEmail.equals("0") && newValue != null) {
+								boolean res = ControllerDAO.modifyCountries(ref, keyword, newValue);
+								//Este res es para checkear si el atributo unico está repetido
+								if(res) {
+									WindowTool.showWindow("Pais modificado correctamente");
+									//Cargar datos en los textArea
+									mainView.getFilePanel().getFriendsArea().setText(null);
+									mainView.getFilePanel().getContactsArea().setText(null);
+									mainView.getFilePanel().getCountriesArea().setText(null);
+									mainView.loadTextArea(ControllerDAO.getAppDTO().getCountriesDB(), ControllerDAO.getAppDTO().getFriendsDB(), ControllerDAO.getAppDTO().getWorkContactsDB());
+									break;
+								}
+							}
+							break;
 							
-							//Actualizar textArea
-							
-						
-							
-							//Cargar datos en los textArea
-							mainView.getFilePanel().getFriendsArea().setText(null);
-							mainView.getFilePanel().getContactsArea().setText(null);
-							mainView.getFilePanel().getCountriesArea().setText(null);
-							mainView.loadTextArea(ControllerDAO.getAppDTO().getCountriesDB(), ControllerDAO.getAppDTO().getFriendsDB(), ControllerDAO.getAppDTO().getWorkContactsDB());
-						//	for(Countries x : countriesDB) {
-						//		System.out.println(x);
-						//	}
-							
-						
-						/*
-								for(Friends x : amigosDB) {
-									System.out.println(x);
-							}*/
-						}else {
-							WindowTool.showWindow("El valor ya existe");
 						}
+						
+						
 					}else {
 						
 					}
