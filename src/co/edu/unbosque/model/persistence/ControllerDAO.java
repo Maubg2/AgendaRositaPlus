@@ -362,7 +362,7 @@ public class ControllerDAO {
 		boolean deleted = false;
 		
 		switch(ref) {
-		case "paises":
+		case "paises", "pais":
 			//Traer base de datos
 			ArrayList<Countries> countriesDB = AppDTO.getCountriesDB();
 			//Buscar el objeto por su atributo único
@@ -412,12 +412,17 @@ public class ControllerDAO {
 	//Si retorna un "2" es porque no tiene 9 caracteres
 	//Si retorna un "3" es porque no hay guiones cada tres números
 	//Si retorna un "4" es porque el email no acaba en @hotmail.com
+	//Si retorna un "5" es que el número de teléfono contiene letras
 	//Si retorna un "0" es porque está bien
 	public String checkFormat(String name, String phoneNumber, String email) {
 		String illegalChar[]= {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
 				"°", "|", "!", "#", "\"", "$", "%", "&", "/", "(", ")", "=", "?",
 				"'", "\\", "¡", "¿", "¨", "+", "*", "´", "~", "}", "]", "`", "{",
 				"[", "^", ",", ";", ".", ":", "-", "_", "@", "¬"};
+		
+		String[] charactersArray = {"q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d","f", "g", "h",
+				"j", "k", "l", "ñ", "z", "x", "c", "v", "b", "n", "m"};
+		
 		if(name != null) {
 			for(String x : illegalChar) {
 				if(name.contains(x)) {
@@ -433,6 +438,13 @@ public class ControllerDAO {
 			}
 			if(phoneNumber.charAt(3) != '-' && phoneNumber.charAt(7) != '-') {
 				return "3";
+			}
+			
+			//Teléfono contiene letras
+			for(String x : charactersArray) {
+				if(phoneNumber.contains(x)) {
+					return "5";
+				}
 			}
 		}
 		if(email != null) {

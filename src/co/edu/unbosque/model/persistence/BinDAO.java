@@ -19,7 +19,7 @@ import co.edu.unbosque.model1.WorkContacts;
  * @author J&M Sistemas
  *
  */
-public class BinDAO {
+public class BinDAO{
 	
 	private ObjectInputStream input;
 	private ObjectOutputStream output;

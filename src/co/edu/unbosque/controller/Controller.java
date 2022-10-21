@@ -125,16 +125,21 @@ public class Controller implements ActionListener{
 						mainView.getFilePanel().getCountriesArea().setText(null);
 						mainView.loadTextArea(countriesList, null, null);
 						
+						//Cargar las cantidades
+						loadCantInfo();
+						
 					}else if(ref.equals("amigos")) {
 						
 						String name = WindowTool.getDataWindow("Agregar amigo: ");
 						String country = WindowTool.getDataWindow("Agregar Pais: ");
 						String phoneNumber = WindowTool.getDataWindow("Agregar número de celular: ");
 						String email = WindowTool.getDataWindow("Agregar correo electronico: ");
-						Friends friend = new Friends(name, country, phoneNumber, email);
+						
 						
 						String resFormatName = ControllerDAO.checkFormat(name, null, null);
 						boolean correctName = false;
+						String resFormatCountry = ControllerDAO.checkFormat(country, null, null);
+						boolean correctCountry = false;
 						String resFormatPhone = ControllerDAO.checkFormat(null, phoneNumber, null);
 						boolean correctPhone = false;
 						String resFormatEmail = ControllerDAO.checkFormat(null, null, email);
@@ -151,13 +156,22 @@ public class Controller implements ActionListener{
 							WindowTool.showWindow("El formato del número debería ser: xxx-xxx-xxx");
 						else if(resFormatPhone.equals("0") && phoneNumber != null)
 							correctPhone = true;
+						else if(resFormatPhone.equals("5")) 
+							WindowTool.showWindow("El número de teléfono no debe contener letras");
+						
 						
 						if(resFormatEmail.equals("4")) 
 							WindowTool.showWindow("El correo debe terminar en: @xxxx.com");
 						else if(resFormatEmail.equals("0") && email != null)
 							correctEmail = true;
 						
-						if(correctName == true && correctPhone == true && correctEmail == true && country != null) {
+						if(resFormatCountry.equals("1"))
+							WindowTool.showWindow("El país tiene caracteres ilegales");
+						else if(resFormatCountry.equals("0"))
+							correctCountry = true;
+						
+						if(correctName && correctPhone && correctEmail && country != null && correctCountry) {
+							Friends friend = new Friends(name, country, phoneNumber, email);
 							String res = ControllerDAO.add(ref, null, friend, null);
 							if(res.equals("0")) 
 								WindowTool.showWindow("No se pudo añadir: El nombre está repetido");
@@ -174,6 +188,9 @@ public class Controller implements ActionListener{
 						//Actualizar textArea
 						mainView.getFilePanel().getFriendsArea().setText(null);
 						mainView.loadTextArea(null, friendsList, null);
+						
+						//Cargar las cantidades
+						loadCantInfo();
 						
 					}else if(ref.equals("contactos")) {
 						
@@ -200,6 +217,8 @@ public class Controller implements ActionListener{
 							WindowTool.showWindow("El telefono debería tener 9 caracteres");
 						else if(resFormatPhone.equals("3")) 
 							WindowTool.showWindow("El formato del número debería ser: xxx-xxx-xxx");
+						else if(resFormatPhone.equals("5"))
+							WindowTool.showWindow("El teléfono del manager no debería tener letras");
 						else if(resFormatPhone.equals("0") && phoneManager != null)
 							correctPhone = true;
 						
@@ -224,6 +243,8 @@ public class Controller implements ActionListener{
 						
 						mainView.getFilePanel().getContactsArea().setText(null);
 						mainView.loadTextArea(null, null, contactsList);
+						//Cargar las cantidades
+						loadCantInfo();
 						
 					}else {
 						WindowTool.showWindow("Escriba una opción valida (paises, amigos o contactos)");
@@ -287,6 +308,8 @@ public class Controller implements ActionListener{
 								mainView.getFilePanel().getContactsArea().setText(null);
 								mainView.getFilePanel().getCountriesArea().setText(null);
 								mainView.loadTextArea(ControllerDAO.getAppDTO().getCountriesDB(), ControllerDAO.getAppDTO().getFriendsDB(), ControllerDAO.getAppDTO().getWorkContactsDB());
+								//Cargar las cantidades
+								loadCantInfo();
 								
 							}
 						
@@ -395,6 +418,9 @@ public class Controller implements ActionListener{
 						mainView.getFilePanel().getContactsArea().setText(null);
 						mainView.getFilePanel().getCountriesArea().setText(null);
 						mainView.loadTextArea(ControllerDAO.getAppDTO().getCountriesDB(), ControllerDAO.getAppDTO().getFriendsDB(), ControllerDAO.getAppDTO().getWorkContactsDB());
+						
+						//Cargar las cantidades
+						loadCantInfo();
 					}
 					else {
 						WindowTool.showWindow("No se encontró el elemento");
@@ -427,7 +453,14 @@ public class Controller implements ActionListener{
 				mainView.getFilePanel().setLoadedValue("No");
 			
 			//Cargar datos en los textArea
+			mainView.getFilePanel().getFriendsArea().setText(null);
+			mainView.getFilePanel().getContactsArea().setText(null);
+			mainView.getFilePanel().getCountriesArea().setText(null);
 			mainView.loadTextArea(ControllerDAO.getAppDTO().getCountriesDB(), ControllerDAO.getAppDTO().getFriendsDB(), ControllerDAO.getAppDTO().getWorkContactsDB());
+			
+			
+			//Cargar las cantidades
+			loadCantInfo();
 			
 			break;
 		default:
@@ -438,6 +471,8 @@ public class Controller implements ActionListener{
 	
 	public void loadCantInfo() {
 		mainView.getFilePanel().setfriendsCantValue("" + ControllerDAO.getAppDTO().getFriendsDB().size());
+		mainView.getFilePanel().setcontactsCantValue("" + ControllerDAO.getAppDTO().getWorkContactsDB().size());
+		mainView.getFilePanel().setCountriesCantValue("" + ControllerDAO.getAppDTO().getCountriesDB().size());
 		
 	}
 	

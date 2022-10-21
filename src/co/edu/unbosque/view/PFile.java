@@ -34,6 +34,8 @@ public class PFile extends JPanel{
 	private JLabel friendsCantValue;
 	private JLabel contactsCantLabel;
 	private JLabel contactsCantValue;
+	private JLabel countriesCantLabel;
+	private JLabel countriesCantValue;
 	
 	
 
@@ -123,26 +125,42 @@ public class PFile extends JPanel{
 		friendsCantLabel = new JLabel("Cantidad de amigos: ");
 		friendsCantLabel.setFont(new Font("Times New Roman", 0, 20));
 		friendsCantLabel.setForeground(Color.WHITE);
-		friendsCantLabel.setBounds(200, 500, 50, 50);
+		friendsCantLabel.setBounds(30, 160, 200, 300);
 		add(friendsCantLabel);
 		
 		friendsCantValue = new JLabel("");
 		friendsCantValue.setFont(new Font("Times New Roman", 0, 20));
 		friendsCantValue.setForeground(Color.WHITE);
-		friendsCantValue.setBounds(200, 500, 50, 50);
+		friendsCantValue.setBounds(210, 160, 200, 300);
 		add(friendsCantValue);
 		
 		contactsCantLabel = new JLabel("Cantidad de contactos: ");
 		contactsCantLabel.setFont(new Font("Times New Roman", 0, 20));
 		contactsCantLabel.setForeground(Color.WHITE);
-		contactsCantLabel.setBounds(200, 500, 50, 50);
+		contactsCantLabel.setBounds(30, 190, 200, 300);
 		add(contactsCantLabel);
 		
 		contactsCantValue = new JLabel("");
 		contactsCantValue.setFont(new Font("Times New Roman", 0, 20));
 		contactsCantValue.setForeground(Color.WHITE);
-		contactsCantValue.setBounds(200, 500, 50, 50);
+		contactsCantValue.setBounds(220, 190, 200, 300);
 		add(contactsCantValue);
+		
+		countriesCantLabel = new JLabel("Cantidad de países:");
+		countriesCantLabel.setFont(new Font("Times New Roman", 0, 20));
+		countriesCantLabel.setForeground(Color.WHITE);
+		countriesCantLabel.setBounds(30, 220, 200, 300);
+		add(countriesCantLabel);
+		
+		countriesCantValue = new JLabel("");
+		countriesCantValue.setFont(new Font("Times New Roman", 0, 20));
+		countriesCantValue.setForeground(Color.WHITE);
+		countriesCantValue.setBounds(200, 220, 200, 300);
+		add(countriesCantValue);
+		
+		
+		
+		
 		
 	}
 
@@ -241,8 +259,8 @@ public class PFile extends JPanel{
 		this.friendsCantLabel = amigosCantLabel;
 	}
 
-	public JLabel getfriendsCantValue() {
-		return friendsCantValue;
+	public String getfriendsCantValue() {
+		return friendsCantValue.getText();
 	}
 
 	public void setfriendsCantValue(String amigosCantValue) {
@@ -257,12 +275,21 @@ public class PFile extends JPanel{
 		this.contactsCantLabel = contactosCantLabel;
 	}
 
-	public JLabel getcontactsCantValue() {
-		return contactsCantValue;
+	public String getcontactsCantValue() {
+		return contactsCantValue.getText();
 	}
 
-	public void setcontactsCantValue(JLabel contactosCantValue) {
-		this.contactsCantValue = contactosCantValue;
+	public void setcontactsCantValue(String contactosCantValue) {
+		this.contactsCantValue.setText(contactosCantValue);
 	}
+
+	public String getCountriesCantValue() {
+		return countriesCantValue.getText();
+	}
+
+	public void setCountriesCantValue(String countriesCantValue) {
+		this.countriesCantValue.setText(countriesCantValue);
+	}
+	
 
 }
