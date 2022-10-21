@@ -71,6 +71,8 @@ public class Controller implements ActionListener{
 		mainView.getButtonsPanel().getDeleteButton().setActionCommand("delete");
 		mainView.getButtonsPanel().getLoadFileButton().addActionListener(this);
 		mainView.getButtonsPanel().getLoadFileButton().setActionCommand("loadFile");
+		mainView.getButtonsPanel().getSeeData().addActionListener(this);
+		mainView.getButtonsPanel().getSeeData().setActionCommand("seeData");
 	}
 	
 	/**
@@ -271,10 +273,17 @@ public class Controller implements ActionListener{
 					if(ref.equals("paises")) {
 						String keyword = WindowTool.getDataWindow("Nombre del pais a modificar");
 						String newValue = WindowTool.getDataWindow("Nombre del pais");
+						
+						
 						boolean res = ControllerDAO.modifyCountries(ref, keyword, newValue);
 						
 						if(res) {
 							WindowTool.showWindow("Pais modificado correctamente");
+							//Cargar datos en los textArea
+							mainView.getFilePanel().getFriendsArea().setText(null);
+							mainView.getFilePanel().getContactsArea().setText(null);
+							mainView.getFilePanel().getCountriesArea().setText(null);
+							mainView.loadTextArea(ControllerDAO.getAppDTO().getCountriesDB(), ControllerDAO.getAppDTO().getFriendsDB(), ControllerDAO.getAppDTO().getWorkContactsDB());
 							//Actualizar textArea
 						}else {
 							WindowTool.showWindow("El valor ya existe");
@@ -291,12 +300,19 @@ public class Controller implements ActionListener{
 							
 							//Actualizar textArea
 							
-						//	ArrayList<Countries> countriesDB = ControllerDAO.getAppDTO().getCountriesDB();
+						
+							
+							//Cargar datos en los textArea
+							mainView.getFilePanel().getFriendsArea().setText(null);
+							mainView.getFilePanel().getContactsArea().setText(null);
+							mainView.getFilePanel().getCountriesArea().setText(null);
+							mainView.loadTextArea(ControllerDAO.getAppDTO().getCountriesDB(), ControllerDAO.getAppDTO().getFriendsDB(), ControllerDAO.getAppDTO().getWorkContactsDB());
 						//	for(Countries x : countriesDB) {
 						//		System.out.println(x);
 						//	}
 							
-						/*	ArrayList<Friends> amigosDB = ControllerDAO.getAppDTO().getFriendsDB();
+						
+						/*
 								for(Friends x : amigosDB) {
 									System.out.println(x);
 							}*/
@@ -329,6 +345,10 @@ public class Controller implements ActionListener{
 					if(res) {
 						WindowTool.showWindow("Elemento borrado correctamente");
 						//Actualizar textArea
+						mainView.getFilePanel().getFriendsArea().setText(null);
+						mainView.getFilePanel().getContactsArea().setText(null);
+						mainView.getFilePanel().getCountriesArea().setText(null);
+						mainView.loadTextArea(ControllerDAO.getAppDTO().getCountriesDB(), ControllerDAO.getAppDTO().getFriendsDB(), ControllerDAO.getAppDTO().getWorkContactsDB());
 					}
 					else {
 						WindowTool.showWindow("No se encontró el elemento");
@@ -342,14 +362,18 @@ public class Controller implements ActionListener{
 			}
 				
 			break;
-		case "loadData":
-			System.out.println("Ver datos presionado");
+		case "seeData":
+			//Mostrar porcentajes
+			
+			
+			
 			break;
 		case "loadFile":
 			//System.out.println("Cargar archivo presionado");
 			ControllerDAO.getPropertiesDAO().loadData(mainView.showFileChooser());
 			//Dividir los datos en archivos binarios
 			ControllerDAO.setBinaries();
+			mainView.getFilePanel(); //Agregar porcentajes
 			boolean response = ControllerDAO.getPropertiesDAO().isFileLoaded();
 			if(response) 
 				mainView.getFilePanel().setLoadedValue("Si");
@@ -364,6 +388,15 @@ public class Controller implements ActionListener{
 			System.out.println("Error en los botones");
 			break;
 		}
+	}
+	
+	public void loadCantInfo() {
+		mainView.getFilePanel().setfriendsCantValue("" + ControllerDAO.getAppDTO().getFriendsDB().size());
+		
+	}
+	
+	public void reloadTextArea() {
+		
 	}
 
 }

@@ -29,6 +29,14 @@ public class PFile extends JPanel{
 	private JLabel loadedValue;
 	private JScrollPane areaScroll;
 	
+	//Valores
+	private JLabel friendsCantLabel;
+	private JLabel friendsCantValue;
+	private JLabel contactsCantLabel;
+	private JLabel contactsCantValue;
+	
+	
+
 	public PFile(){
 		
 		setLayout(null);
@@ -109,6 +117,32 @@ public class PFile extends JPanel{
 		loadedValue.setForeground(Color.WHITE);
 		loadedValue.setBounds(330, 400, 50, 50);
 		add(loadedValue);
+		
+		//Valores y porcentajes
+		
+		friendsCantLabel = new JLabel("Cantidad de amigos: ");
+		friendsCantLabel.setFont(new Font("Times New Roman", 0, 20));
+		friendsCantLabel.setForeground(Color.WHITE);
+		friendsCantLabel.setBounds(200, 500, 50, 50);
+		add(friendsCantLabel);
+		
+		friendsCantValue = new JLabel("");
+		friendsCantValue.setFont(new Font("Times New Roman", 0, 20));
+		friendsCantValue.setForeground(Color.WHITE);
+		friendsCantValue.setBounds(200, 500, 50, 50);
+		add(friendsCantValue);
+		
+		contactsCantLabel = new JLabel("Cantidad de contactos: ");
+		contactsCantLabel.setFont(new Font("Times New Roman", 0, 20));
+		contactsCantLabel.setForeground(Color.WHITE);
+		contactsCantLabel.setBounds(200, 500, 50, 50);
+		add(contactsCantLabel);
+		
+		contactsCantValue = new JLabel("");
+		contactsCantValue.setFont(new Font("Times New Roman", 0, 20));
+		contactsCantValue.setForeground(Color.WHITE);
+		contactsCantValue.setBounds(200, 500, 50, 50);
+		add(contactsCantValue);
 		
 	}
 
@@ -198,6 +232,37 @@ public class PFile extends JPanel{
 
 	public void setLoadedValue(JLabel loadedValue) {
 		this.loadedValue = loadedValue;
+	}
+	public JLabel getfriendsCantLabel() {
+		return friendsCantLabel;
+	}
+
+	public void setfriendsCantLabel(JLabel amigosCantLabel) {
+		this.friendsCantLabel = amigosCantLabel;
+	}
+
+	public JLabel getfriendsCantValue() {
+		return friendsCantValue;
+	}
+
+	public void setfriendsCantValue(String amigosCantValue) {
+		this.friendsCantValue.setText(amigosCantValue);
+	}
+
+	public JLabel getcontactsCantLabel() {
+		return contactsCantLabel;
+	}
+
+	public void setcontactsCantLabel(JLabel contactosCantLabel) {
+		this.contactsCantLabel = contactosCantLabel;
+	}
+
+	public JLabel getcontactsCantValue() {
+		return contactsCantValue;
+	}
+
+	public void setcontactsCantValue(JLabel contactosCantValue) {
+		this.contactsCantValue = contactosCantValue;
 	}
 
 }

@@ -196,7 +196,7 @@ public class ControllerDAO {
 			
 			//Buscar el objeto por su atributo único
 			for(Friends x : friendsDB) {
-				if(x.getName().equals(keyword)) { //Si encuentra el objeto
+				if(x.getName().toLowerCase().equals(keyword)) { //Si encuentra el objeto
 					//Ver cual es el atributo que quiere modificar de este objeto
 					switch(attribute) {
 					case "nombre": //Busca actualizar el atributo único
@@ -230,6 +230,7 @@ public class ControllerDAO {
 			if(found) {
 				AppDTO.setFriendsDB(friendsDB); //Actualizar central de datos
 				FriendsBin.loadFriends(AppDTO.getFriendsDB()); //Actualizar binario
+				//Actualizar vista
 				return found;
 			}else { //No se encontró o no se modificó el objeto
 				return found;
@@ -247,12 +248,13 @@ public class ControllerDAO {
 						legal = false; //newValue ya es valor de un atributo único
 						break;
 					}
+					//System.out.println("Atributo = nombre"); //Legal = true
 				}
 			}
 			
 			//Buscar el objeto por su atributo único
 			for(WorkContacts x : contactsDB) {
-				if(x.getName().equals(keyword)) {
+				if(x.getName().toLowerCase().equals(keyword)) {
 					//Se encontró el objeto, ahora a ver cuál atributo desea modificar
 					switch(attribute) {
 					case "nombre":
@@ -266,7 +268,8 @@ public class ControllerDAO {
 						x.setBusiness(newValue);
 						found = true;
 						break;
-					case "pais": 
+					case "pais":
+						System.out.println("Entro a pais");
 						x.setCountry(newValue);
 						found = true;
 						break;

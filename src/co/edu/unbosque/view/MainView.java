@@ -57,7 +57,7 @@ public class MainView extends JFrame{
 		buttonsPanel.setBackground(Color.decode("#2B4865"));
 		getContentPane().add(buttonsPanel);
 		
-		fileChooser = new JFileChooser();
+		fileChooser = new JFileChooser(new File("src/datos"));
 		
 		fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("PROPERTIES", "properties"));
 		fileChooser.setAcceptAllFileFilterUsed(true);
