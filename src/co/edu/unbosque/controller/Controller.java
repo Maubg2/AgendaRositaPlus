@@ -20,7 +20,7 @@ import co.edu.unbosque.model1.WorkContacts;
  * En esta clase se conecta la vista con el modelo, se le piden los datos al usuario
  * con la vista, y se mandan esos datos recolectados al modelo mediante los parámetros
  * de los métodos
- * @author HP
+ * @author J&M Sistemas
  * @see ActionListener
  */
 public class Controller implements ActionListener{
@@ -476,8 +476,5 @@ public class Controller implements ActionListener{
 		
 	}
 	
-	public void reloadTextArea() {
-		
-	}
 
 }

@@ -137,6 +137,7 @@ public class MainView extends JFrame{
 		}
 	}
 
+
 	public PTitle getTitlePanel() {
 		return titlePanel;
 	}
